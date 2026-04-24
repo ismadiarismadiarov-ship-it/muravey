@@ -1,22 +1,6 @@
 {
-  "updatedAt": "2026-04-24T09:08:38.600Z",
+  "updatedAt": "2026-04-24T09:12:05.656Z",
   "products": [
-    {
-      "id": 1777021716588,
-      "name": "покрышка с диском",
-      "price": 2500,
-      "imagePath": "assets/uploads/product-1777021716588-1777021716591.jpeg",
-      "imageVersion": 1777021716591,
-      "updatedAt": "2026-04-24T09:08:38.600Z"
-    },
-    {
-      "id": 1777021131388,
-      "name": "покрышка с диском",
-      "price": 2500,
-      "imagePath": "assets/uploads/product-1777021131388-1777021131391.jpeg",
-      "imageVersion": 1777021131391,
-      "updatedAt": "2026-04-24T08:58:52.804Z"
-    },
     {
       "id": 101,
       "name": "тормозной колотка",
@@ -39,7 +23,7 @@
       "price": 180,
       "imagePath": "assets/products/relay.jpeg",
       "imageVersion": 1745486400003,
-      "updatedAt": "2026-04-24T09:20:00.000Z"
+      "updatedAt": "2026-04-24T09:12:05.650Z"
     },
     {
       "id": 104,
