@@ -361,7 +361,7 @@ button {
 
 .img-container {
     width: 100%;
-    height: 290px;
+    height: 320px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -374,8 +374,8 @@ button {
 .img-container img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    padding: 10px;
+    object-fit: cover;
+    padding: 0;
     border-radius: 4px;
 }
 
@@ -952,12 +952,8 @@ button {
     }
 
     .img-container {
-        height: 200px;
+        height: 260px;
         border-radius: 8px;
-    }
-
-    .img-container img {
-        padding: 8px;
     }
 
     .cart-panel {

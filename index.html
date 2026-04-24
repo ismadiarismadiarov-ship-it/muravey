@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ЭлМОТО | Мото тетиктер жана заказ берүү</title>
-    <meta name="description" content="ЭлМОТО - мото тетиктерди онлайн табуу жана заказ берүү үчүн ыңгайлуу дүкөн. Сапаттуу moto тетиктер жана тез байланыш.">
+    <meta name="description" content="ЭлМОТО - мото тетиктерди табуу жана заказ берүү үчүн ыңгайлуу дүкөн. Сапаттуу moto тетиктер жана тез байланыш.">
     <meta name="keywords" content="ЭлМОТО, Эл Мото, мото, moto, мото тетиктер, мотозапчасти, заказ, Кыргызстан">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="theme-color" content="#ff9800">
     <meta property="og:title" content="ЭлМОТО | Мото тетиктер дүкөнү">
-    <meta property="og:description" content="ЭлМОТО сайтынан мото тетиктерди тандап, онлайн заказ бере аласыз.">
+    <meta property="og:description" content="ЭлМОТО сайтынан мото тетиктерди тандап, түз заказ бере аласыз.">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ky_KG">
     <meta name="twitter:card" content="summary">
@@ -23,7 +23,7 @@
       "@context": "https://schema.org",
       "@type": "Store",
       "name": "ЭлМОТО",
-      "description": "ЭлМОТО - мото тетиктер дүкөнү жана онлайн заказ кызматы.",
+      "description": "ЭлМОТО - мото тетиктер дүкөнү жана тез заказ кызматы.",
       "keywords": "ЭлМОТО, moto, мото, мото тетиктер, заказ",
       "availableLanguage": ["ky", "ru"],
       "areaServed": "KG"
@@ -65,11 +65,11 @@
         <section class="banner">
             <div>
                 <h1>ЭлМОТО мото тетиктери</h1>
-                <p>Сапаттуу moto тетиктер, ишенимдүү сервис жана онлайн заказ берүү.</p>
+                <p>Сапаттуу moto тетиктер жана ишенимдүү сервис.</p>
             </div>
             <div class="hero-stats">
                 <div><strong id="product-total">0</strong> товар</div>
-                <div><strong>Онлайн</strong> заказ берүү</div>
+                <div><strong>Ыкчам</strong> тейлөө</div>
             </div>
         </section>
 
@@ -101,43 +101,6 @@
             </div>
         </div>
     </aside>
-
-    <button id="admin-open" class="admin-entry" aria-label="Open admin panel">⚙️</button>
-
-    <div id="login-modal" class="modal" aria-hidden="true">
-        <div class="modal-card">
-            <h3>Админ кирүү</h3>
-            <input id="admin-password" type="password" placeholder="Пароль">
-            <div class="modal-actions">
-                <button id="admin-login" class="checkout-btn">КИРҮҮ</button>
-                <button id="login-close" class="secondary-btn">Жап</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="admin-panel" class="modal" aria-hidden="true">
-        <div class="admin-window">
-            <div class="admin-header">
-                <div>
-                    <h2>💎 Башкаруу панели</h2>
-                    <p>Товарларды кошуу, өчүрүү жана түзөтүү.</p>
-                </div>
-                <button id="admin-close" class="icon-button" aria-label="Close admin panel">✕</button>
-            </div>
-
-            <div class="admin-body">
-                <input id="product-name" type="text" placeholder="Товардын аталышы">
-                <input id="product-price" type="number" placeholder="Баасы (сом)">
-                <label class="upload-label" for="product-image">
-                    <span id="upload-status">📸 Сүрөт тандаңыз</span>
-                </label>
-                <input id="product-image" type="file" accept="image/*" hidden>
-                <div id="image-preview" class="image-preview hidden"></div>
-                <button id="add-product" class="checkout-btn">Товарды кошуу</button>
-            </div>
-            <div id="admin-list" class="admin-list-scroll"></div>
-        </div>
-    </div>
 
     <div id="toast" class="toast" aria-live="assertive" aria-atomic="true"></div>
 

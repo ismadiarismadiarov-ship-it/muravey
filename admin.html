@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЭлМОТО Админ</title>
+    <meta name="description" content="ЭлМОТО админ барагы. Товарларды кошуу жана өчүрүү.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/jpeg" href="assets/emoto-logo.jpeg">
+    <link rel="apple-touch-icon" href="assets/emoto-logo.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-page-body">
+    <header class="main-header">
+        <div class="container header-grid">
+            <div class="brand">
+                <img src="assets/emoto-logo.jpeg" alt="ЭлМОТО эмблемасы" class="brand-emblem">
+                <div class="brand-text">
+                    <span class="logo">ЭлМОТО</span>
+                    <span class="logo-accent">админ панели</span>
+                </div>
+            </div>
+            <div></div>
+            <div class="header-actions">
+                <a href="index.html" class="qr-top-link">Сайтка кайтуу</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container admin-page">
+        <section id="login-card" class="admin-card auth-card">
+            <h1>Админ кирүү</h1>
+            <p>Панелге кирүү үчүн пароль жазыңыз.</p>
+            <div class="auth-form">
+                <input id="admin-password" type="password" placeholder="Пароль">
+                <button id="admin-login-btn" class="checkout-btn">КИРҮҮ</button>
+            </div>
+        </section>
+
+        <section id="admin-panel" class="admin-card admin-hidden">
+            <div class="admin-panel-head">
+                <div>
+                    <h2>Товар башкаруу</h2>
+                    <p>Товар кошуу, өчүрүү жана сүрөттү жаңыртуу.</p>
+                </div>
+                <button id="admin-logout" class="secondary-btn">Чыгуу</button>
+            </div>
+
+            <div class="admin-form-grid">
+                <input id="product-name" type="text" placeholder="Товардын аталышы">
+                <input id="product-price" type="number" placeholder="Баасы (сом)">
+                <label class="upload-label" for="product-image">
+                    <span id="upload-status">📸 Сүрөт тандаңыз</span>
+                </label>
+                <input id="product-image" type="file" accept="image/*" hidden>
+                <div id="image-preview" class="image-preview hidden"></div>
+                <button id="add-product" class="checkout-btn">Товарды кошуу</button>
+            </div>
+
+            <div id="admin-list" class="admin-list-grid"></div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast" aria-live="assertive" aria-atomic="true"></div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

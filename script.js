@@ -1,6 +1,5 @@
-const TG_TOKEN = "8425959254:AAEX4_b-HxV-scwVXBMH5lXB_l4lIQgjdnI"; // Мисал токен, өндүрүш үчүн бекитилсин
-const TG_ID = "6552625844"; // Telegram chat_id
-const ADMIN_PASS = "2026";
+const TG_TOKEN = "8425959254:AAEX4_b-HxV-scwVXBMH5lXB_l4lIQgjdnI";
+const TG_ID = "6552625844";
 const DB_KEY = 'muravey_pro_db';
 const CART_KEY = 'muravey_pro_cart';
 const SEARCH_KEYWORDS = 'элмото moto мото мото тетиктер motoparts';
@@ -11,37 +10,17 @@ const PRODUCT_IMAGE_MAP = {
     3: 'assets/products/product-3.svg',
     4: 'assets/products/product-4.svg'
 };
+
 const DEFAULT_PRODUCTS = [
-    {
-        id: 1,
-        name: 'Электр гайканы',
-        price: 350,
-        img: PRODUCT_IMAGE_MAP[1]
-    },
-    {
-        id: 2,
-        name: 'Металл плитка',
-        price: 1120,
-        img: PRODUCT_IMAGE_MAP[2]
-    },
-    {
-        id: 3,
-        name: 'Кабель жиптери',
-        price: 220,
-        img: PRODUCT_IMAGE_MAP[3]
-    },
-    {
-        id: 4,
-        name: 'Мотор контроллери',
-        price: 2950,
-        img: PRODUCT_IMAGE_MAP[4]
-    }
+    { id: 1, name: 'Электр гайканы', price: 350, img: PRODUCT_IMAGE_MAP[1] },
+    { id: 2, name: 'Металл плитка', price: 1120, img: PRODUCT_IMAGE_MAP[2] },
+    { id: 3, name: 'Кабель жиптери', price: 220, img: PRODUCT_IMAGE_MAP[3] },
+    { id: 4, name: 'Мотор контроллери', price: 2950, img: PRODUCT_IMAGE_MAP[4] }
 ];
 
 const state = {
     products: [],
     cart: {},
-    selectedImage: null,
     filteredProducts: []
 };
 
@@ -121,20 +100,6 @@ function initialize() {
     refs.orderSubmit = $('#order-submit');
     refs.customerName = $('#customer-name');
     refs.customerPhone = $('#customer-phone');
-    refs.adminOpen = $('#admin-open');
-    refs.loginModal = $('#login-modal');
-    refs.adminPanel = $('#admin-panel');
-    refs.adminClose = $('#admin-close');
-    refs.loginClose = $('#login-close');
-    refs.adminLogin = $('#admin-login');
-    refs.adminPassword = $('#admin-password');
-    refs.productName = $('#product-name');
-    refs.productPrice = $('#product-price');
-    refs.productImage = $('#product-image');
-    refs.uploadStatus = $('#upload-status');
-    refs.imagePreview = $('#image-preview');
-    refs.addProduct = $('#add-product');
-    refs.adminList = $('#admin-list');
     refs.toast = $('#toast');
     refs.themeToggle = $('#theme-toggle');
 
@@ -145,7 +110,6 @@ function initialize() {
     bindEvents();
     renderCatalog();
     renderCart();
-    renderAdminList();
     loadTheme();
 }
 
@@ -159,19 +123,11 @@ function bindEvents() {
     refs.cartOpen.addEventListener('click', () => toggleCart(true));
     refs.cartClose.addEventListener('click', () => toggleCart(false));
     refs.orderSubmit.addEventListener('click', handleCheckout);
-    refs.adminOpen.addEventListener('click', () => toggleModal(refs.loginModal, true));
-    refs.loginClose.addEventListener('click', () => toggleModal(refs.loginModal, false));
-    refs.adminClose.addEventListener('click', () => toggleModal(refs.adminPanel, false));
-    refs.adminLogin.addEventListener('click', handleAdminLogin);
-    refs.productImage.addEventListener('change', handleImageUpload);
-    refs.addProduct.addEventListener('click', handleProductCreate);
     refs.themeToggle.addEventListener('click', toggleTheme);
 
     document.addEventListener('keydown', event => {
         if (event.key === 'Escape') {
             toggleCart(false);
-            toggleModal(refs.loginModal, false);
-            toggleModal(refs.adminPanel, false);
         }
     });
 }
@@ -189,7 +145,7 @@ function renderCatalog() {
     refs.productTotal.textContent = state.filteredProducts.length;
 
     if (!state.filteredProducts.length) {
-        refs.productList.innerHTML = `<div class="empty-state"><strong>Товар табылбады</strong><p>Сөздү башкача жазып көрүңүз же жаңы товар кошуңуз.</p></div>`;
+        refs.productList.innerHTML = `<div class="empty-state"><strong>Товар табылбады</strong><p>Сөздү башкача жазып көрүңүз.</p></div>`;
         return;
     }
 
@@ -200,7 +156,7 @@ function renderCatalog() {
 }
 
 function createProductCard(product) {
-    const imagePath = (typeof product.img === 'string' && product.img.trim()) ? product.img : IMAGE_FALLBACK;
+    const imagePath = typeof product.img === 'string' && product.img.trim() ? product.img : IMAGE_FALLBACK;
 
     return `
         <article class="card">
@@ -256,7 +212,6 @@ function createCartRow(item) {
 function handleCartAction(event) {
     const action = event.target.dataset.action;
     const id = Number(event.target.dataset.id);
-
     if (!id) return;
 
     if (action === 'add') {
@@ -292,11 +247,7 @@ function addToCart(id) {
 function changeQuantity(id, delta) {
     if (!state.cart[id]) return;
     state.cart[id].quantity += delta;
-
-    if (state.cart[id].quantity <= 0) {
-        delete state.cart[id];
-    }
-
+    if (state.cart[id].quantity <= 0) delete state.cart[id];
     saveCart();
     renderCart();
 }
@@ -341,7 +292,6 @@ function validatePhone(value) {
 async function sendOrder(name, phone, cartItems) {
     const itemLines = cartItems.map((item, index) => `${index + 1}. ${item.name} x${item.quantity} - ${formatCurrency(item.price * item.quantity)}`).join('\n');
     const totalAmount = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
     const message = `📦 *ЖАҢЫ ЗАКАЗ (ЭлМОТО)*\n\n👤 *Кардар:* ${name}\n📞 *Тел:* ${phone}\n\n*Товарлар:*\n${itemLines}\n\n💰 *Жалпы:* ${formatCurrency(totalAmount)}`;
 
     try {
@@ -356,9 +306,6 @@ async function sendOrder(name, phone, cartItems) {
             console.error('Telegram API error:', errorData);
             throw new Error(`Telegram API error: ${response.status}`);
         }
-
-        const data = await response.json();
-        console.log('Telegram response:', data);
 
         showToast('Заказ кабыл алынды!');
         state.cart = {};
@@ -376,103 +323,6 @@ async function sendOrder(name, phone, cartItems) {
 function toggleCart(show) {
     refs.cartPanel.classList.toggle('active', show);
     refs.cartPanel.setAttribute('aria-hidden', String(!show));
-}
-
-function toggleModal(modal, show) {
-    modal.classList.toggle('active', show);
-    modal.setAttribute('aria-hidden', String(!show));
-}
-
-function handleAdminLogin() {
-    const password = refs.adminPassword.value;
-    if (password === ADMIN_PASS) {
-        refs.adminPassword.value = '';
-        toggleModal(refs.loginModal, false);
-        toggleModal(refs.adminPanel, true);
-        renderAdminList();
-    } else {
-        showToast('Пароль туура эмес');
-    }
-}
-
-function handleImageUpload(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = () => {
-        state.selectedImage = reader.result;
-        refs.uploadStatus.textContent = '✅ Сүрөт тандалды';
-        refs.imagePreview.style.backgroundImage = `url(${state.selectedImage})`;
-        refs.imagePreview.classList.remove('hidden');
-    };
-    reader.readAsDataURL(file);
-}
-
-function handleProductCreate() {
-    const name = refs.productName.value.trim();
-    const price = Number(refs.productPrice.value);
-
-    if (!name || !price || !state.selectedImage) {
-        showToast('Баарын туура толтуруңуз');
-        return;
-    }
-
-    const newProduct = {
-        id: Date.now(),
-        name,
-        price,
-        img: state.selectedImage
-    };
-
-    state.products.unshift(newProduct);
-    setLocalData(DB_KEY, state.products);
-    state.filteredProducts = [...state.products];
-    renderCatalog();
-    renderAdminList();
-
-    refs.productName.value = '';
-    refs.productPrice.value = '';
-    refs.productImage.value = '';
-    refs.uploadStatus.textContent = '📸 Сүрөт тандаңыз';
-    refs.imagePreview.style.backgroundImage = '';
-    refs.imagePreview.classList.add('hidden');
-    state.selectedImage = null;
-
-    showToast('Товар базага кошулду');
-}
-
-function renderAdminList() {
-    if (!refs.adminList) return;
-
-    refs.adminList.innerHTML = state.products.map(product => `
-        <div class="admin-item">
-            <div>
-                <strong>${product.name}</strong>
-                <span>${formatCurrency(product.price)}</span>
-            </div>
-            <button data-action="delete" data-id="${product.id}">Өчүрүү</button>
-        </div>
-    `).join('');
-
-    refs.adminList.querySelectorAll('[data-action]').forEach(btn => {
-        btn.addEventListener('click', event => {
-            const id = Number(event.target.dataset.id);
-            handleProductDelete(id);
-        });
-    });
-}
-
-function handleProductDelete(id) {
-    const confirmed = confirm('Товарды чындыгында өчүрөсүзбү?');
-    if (!confirmed) return;
-
-    state.products = state.products.filter(item => item.id !== id);
-    setLocalData(DB_KEY, state.products);
-    state.filteredProducts = state.filteredProducts.filter(item => item.id !== id);
-    renderCatalog();
-    renderAdminList();
-    showToast('Товар өчүрүлдү');
 }
 
 function loadTheme() {
