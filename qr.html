@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЭлМОТО QR | Тез кирүү</title>
+    <meta name="description" content="ЭлМОТО сайтына QR код менен тез кирүү барагы.">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/svg+xml" href="emoto-emblem.svg">
+    <link rel="apple-touch-icon" href="emoto-emblem.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container header-grid">
+            <div class="brand">
+                <img src="emoto-emblem.svg" alt="ЭлМОТО эмблемасы" class="brand-emblem">
+                <div class="brand-text">
+                    <span class="logo">ЭлМОТО</span>
+                    <span class="logo-accent">QR баракча</span>
+                </div>
+            </div>
+            <div></div>
+            <div class="header-actions">
+                <a href="index.html" class="qr-top-link">Башкы бет</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container qr-page">
+        <section class="banner qr-hero">
+            <div>
+                <h1>QR менен тез кирүү</h1>
+                <p>Телефон камерасы менен сканерлеп, ЭлМОТО сайтына дароо өтүңүз.</p>
+            </div>
+        </section>
+
+        <section class="qr-card">
+            <div id="qr-code" class="qr-container" aria-live="polite"></div>
+            <p id="qr-url" class="qr-url"></p>
+            <a href="index.html" class="checkout-btn qr-home-btn">Башкы бетке кайтуу</a>
+        </section>
+    </main>
+
+    <script>
+        (function renderQrPage() {
+            const homeUrl = new URL('index.html', window.location.href).href;
+            const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=${encodeURIComponent(homeUrl)}`;
+            const qrCode = document.getElementById('qr-code');
+            const qrText = document.getElementById('qr-url');
+
+            qrCode.innerHTML = `<img src="${qrImageUrl}" alt="ЭлМОТО QR коду">`;
+            qrText.textContent = homeUrl;
+        }());
+    </script>
+</body>
+</html>

@@ -3,41 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MURAVEY PRO | Сапаттуу тетиктер</title>
+    <title>ЭлМОТО | Мото тетиктер жана заказ берүү</title>
+    <meta name="description" content="ЭлМОТО - мото тетиктерди онлайн табуу жана заказ берүү үчүн ыңгайлуу дүкөн. Сапаттуу moto тетиктер жана тез байланыш.">
+    <meta name="keywords" content="ЭлМОТО, Эл Мото, мото, moto, мото тетиктер, мотозапчасти, заказ, Кыргызстан">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#ff9800">
+    <meta property="og:title" content="ЭлМОТО | Мото тетиктер дүкөнү">
+    <meta property="og:description" content="ЭлМОТО сайтынан мото тетиктерди тандап, онлайн заказ бере аласыз.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ky_KG">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" type="image/svg+xml" href="emoto-emblem.svg">
+    <link rel="apple-touch-icon" href="emoto-emblem.svg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "ЭлМОТО",
+      "description": "ЭлМОТО - мото тетиктер дүкөнү жана онлайн заказ кызматы.",
+      "keywords": "ЭлМОТО, moto, мото, мото тетиктер, заказ",
+      "availableLanguage": ["ky", "ru"],
+      "areaServed": "KG"
+    }
+    </script>
 </head>
 <body>
 
     <header class="main-header">
         <div class="container header-grid">
             <div class="brand">
-                <span class="logo">MURAVEY</span>
-                <span class="logo-accent">PRO</span>
+                <img src="emoto-emblem.svg" alt="ЭлМОТО эмблемасы" class="brand-emblem">
+                <div class="brand-text">
+                    <span class="logo">ЭлМОТО</span>
+                    <span class="logo-accent">moto тетиктер</span>
+                </div>
             </div>
 
             <form id="search-form" class="search-panel" autocomplete="off">
-                <input id="search-input" type="search" placeholder="Тетиктердин арасынан издөө..." aria-label="Search products">
+                <input id="search-input" type="search" placeholder="Мото тетиктерди издөө..." aria-label="Мото товарларды издөө">
                 <button type="submit" class="search-btn">ТАБУУ</button>
             </form>
 
-            <button id="cart-open" class="cart-trigger" aria-label="Open cart">
-                <span class="icon">🛒</span>
-                <span class="text">Себет Исма</span>
-                <span id="cart-count" class="cart-badge">0</span>
-            </button>
+            <div class="header-actions">
+                <button id="cart-open" class="cart-trigger" aria-label="Open orders panel">
+                    <span class="icon">🛒</span>
+                    <span class="text">Заказдар</span>
+                    <span id="cart-count" class="cart-badge">0</span>
+                </button>
 
-            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
 
-            <button id="qr-show" class="qr-toggle" aria-label="Show QR code">📱</button>
+                <a href="qr.html" class="qr-link" aria-label="QR баракчасын ачуу">QR</a>
+            </div>
         </div>
     </header>
 
     <main class="container">
         <section class="banner">
             <div>
-                <h1>Биздин товарлар</h1>
-                <p>Сапаттуу, ишенимдүү жана тез жеткирилүүчү тетиктер.</p>
+                <h1>ЭлМОТО мото тетиктери</h1>
+                <p>Сапаттуу moto тетиктер, ишенимдүү сервис жана онлайн заказ берүү.</p>
             </div>
             <div class="hero-stats">
                 <div><strong id="product-total">0</strong> товар</div>
@@ -52,7 +79,7 @@
         <div class="cart-inner">
             <div class="cart-header">
                 <div>
-                    <h2>Себет</h2>
+                    <h2>Заказдар</h2>
                     <p id="cart-summary">0 товар, 0 сом</p>
                 </div>
                 <button id="cart-close" class="icon-button" aria-label="Close cart">✕</button>
@@ -69,7 +96,7 @@
                     <input id="customer-name" type="text" placeholder="Атыңыз" autocomplete="name">
                     <input id="customer-phone" type="tel" placeholder="Телефон номери (0...)">
                 </div>
-                <button id="order-submit" class="checkout-btn">ЗАКАЗДЫ ТАПШЫРУУ</button>
+                <button id="order-submit" class="checkout-btn">ЗАКАЗ БЕРҮҮ</button>
             </div>
         </div>
     </aside>
@@ -111,19 +138,8 @@
         </div>
     </div>
 
-    <div id="qr-modal" class="modal" aria-hidden="true">
-        <div class="modal-card">
-            <h3>Сайтка QR код менен кирүү</h3>
-            <div id="qr-code" class="qr-container"></div>
-            <div class="modal-actions">
-                <button id="qr-close" class="secondary-btn">Жап</button>
-            </div>
-        </div>
-    </div>
-
     <div id="toast" class="toast" aria-live="assertive" aria-atomic="true"></div>
 
     <script src="script.js"></script>
 </body>
 </html>
-//bcvfvvfvfdghfvdgv

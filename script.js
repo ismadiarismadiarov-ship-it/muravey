@@ -3,6 +3,7 @@ const TG_ID = "6552625844"; // Telegram chat_id
 const ADMIN_PASS = "2026";
 const DB_KEY = 'muravey_pro_db';
 const CART_KEY = 'muravey_pro_cart';
+const SEARCH_KEYWORDS = 'элмото moto мото мото тетиктер motoparts';
 const DEFAULT_PRODUCTS = [
     {
         id: 1,
@@ -88,14 +89,12 @@ function initialize() {
     refs.productName = $('#product-name');
     refs.productPrice = $('#product-price');
     refs.productImage = $('#product-image');
-    refs.uploadStatus = $('#upload-status');    refs.imagePreview = $('#image-preview');    refs.addProduct = $('#add-product');
+    refs.uploadStatus = $('#upload-status');
+    refs.imagePreview = $('#image-preview');
+    refs.addProduct = $('#add-product');
     refs.adminList = $('#admin-list');
     refs.toast = $('#toast');
     refs.themeToggle = $('#theme-toggle');
-    refs.qrShow = $('#qr-show');
-    refs.qrModal = $('#qr-modal');
-    refs.qrClose = $('#qr-close');
-    refs.qrCode = $('#qr-code');
 
     state.products = getLocalData(DB_KEY, DEFAULT_PRODUCTS);
     state.filteredProducts = [...state.products];
@@ -125,8 +124,6 @@ function bindEvents() {
     refs.productImage.addEventListener('change', handleImageUpload);
     refs.addProduct.addEventListener('click', handleProductCreate);
     refs.themeToggle.addEventListener('click', toggleTheme);
-    refs.qrShow.addEventListener('click', showQR);
-    refs.qrClose.addEventListener('click', () => toggleModal(refs.qrModal, false));
 
     document.addEventListener('keydown', event => {
         if (event.key === 'Escape') {
@@ -139,7 +136,10 @@ function bindEvents() {
 
 function handleSearch() {
     const query = refs.searchInput.value.trim().toLowerCase();
-    state.filteredProducts = state.products.filter(product => product.name.toLowerCase().includes(query));
+    state.filteredProducts = state.products.filter(product => {
+        const searchable = `${product.name} ${SEARCH_KEYWORDS}`.toLowerCase();
+        return searchable.includes(query);
+    });
     renderCatalog();
 }
 
@@ -166,7 +166,7 @@ function createProductCard(product) {
             <div class="card-body">
                 <h3>${product.name}</h3>
                 <div class="price">${formatCurrency(product.price)}</div>
-                <button class="checkout-btn" data-action="add" data-id="${product.id}">Себетке кошуу</button>
+                <button class="checkout-btn" data-action="add" data-id="${product.id}">Заказ берүү</button>
             </div>
         </article>
     `;
@@ -182,7 +182,7 @@ function renderCart() {
     refs.totalAmount.textContent = formatCurrency(totalAmount);
 
     if (!entries.length) {
-        refs.cartItems.innerHTML = `<div class="cart-item"><strong>Себет бош</strong><span>Товар кошуңуз.</span></div>`;
+        refs.cartItems.innerHTML = `<div class="cart-item"><strong>Заказдар бош</strong><span>Товар тандап, заказ бериңиз.</span></div>`;
         return;
     }
 
@@ -242,7 +242,7 @@ function addToCart(id) {
     saveCart();
     renderCart();
     toggleCart(true);
-    showToast(`${product.name} себетке кошулду`);
+    showToast(`${product.name} заказдарга кошулду`);
 }
 
 function changeQuantity(id, delta) {
@@ -283,7 +283,7 @@ function handleCheckout() {
     }
 
     if (!cartItems.length) {
-        showToast('Себетке товар кошуңуз');
+        showToast('Заказ берүү үчүн товар тандаңыз');
         return;
     }
 
@@ -298,7 +298,7 @@ async function sendOrder(name, phone, cartItems) {
     const itemLines = cartItems.map((item, index) => `${index + 1}. ${item.name} x${item.quantity} - ${formatCurrency(item.price * item.quantity)}`).join('\n');
     const totalAmount = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-    const message = `📦 *ЖАҢЫ ЗАКАЗ (MURAVEY PRO)*\n\n👤 *Кардар:* ${name}\n📞 *Тел:* ${phone}\n\n*Товарлар:*\n${itemLines}\n\n💰 *Жалпы:* ${formatCurrency(totalAmount)}`;
+    const message = `📦 *ЖАҢЫ ЗАКАЗ (ЭлМОТО)*\n\n👤 *Кардар:* ${name}\n📞 *Тел:* ${phone}\n\n*Товарлар:*\n${itemLines}\n\n💰 *Жалпы:* ${formatCurrency(totalAmount)}`;
 
     try {
         const response = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
@@ -443,13 +443,6 @@ function toggleTheme() {
     localStorage.setItem('theme', theme);
     refs.themeToggle.textContent = isDark ? '☀️' : '🌙';
     showToast(`Тема ${theme === 'dark' ? 'кара' : 'ак'} болуп өзгөртүлдү`);
-}
-
-function showQR() {
-    const url = window.location.href;
-    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
-    refs.qrCode.innerHTML = `<img src="${qrUrl}" alt="QR код">`;
-    toggleModal(refs.qrModal, true);
 }
 
 document.addEventListener('DOMContentLoaded', initialize);
