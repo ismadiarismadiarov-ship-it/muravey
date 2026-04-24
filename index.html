@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MURAVEY PRO | Сапаттуу тетиктер</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container header-grid">
+            <div class="brand">
+                <span class="logo">MURAVEY</span>
+                <span class="logo-accent">PRO</span>
+            </div>
+
+            <form id="search-form" class="search-panel" autocomplete="off">
+                <input id="search-input" type="search" placeholder="Тетиктердин арасынан издөө..." aria-label="Search products">
+                <button type="submit" class="search-btn">ТАБУУ</button>
+            </form>
+
+            <button id="cart-open" class="cart-trigger" aria-label="Open cart">
+                <span class="icon">🛒</span>
+                <span class="text">Себет</span>
+                <span id="cart-count" class="cart-badge">0</span>
+            </button>
+
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+
+            <button id="qr-show" class="qr-toggle" aria-label="Show QR code">📱</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="banner">
+            <div>
+                <h1>Биздин товарлар</h1>
+                <p>Сапаттуу, ишенимдүү жана тез жеткирилүүчү тетиктер.</p>
+            </div>
+            <div class="hero-stats">
+                <div><strong id="product-total">0</strong> товар</div>
+                <div><strong>Онлайн</strong> заказ берүү</div>
+            </div>
+        </section>
+
+        <section id="product-list" class="market-grid" aria-live="polite"></section>
+    </main>
+
+    <aside id="cart-panel" class="cart-panel" aria-hidden="true">
+        <div class="cart-inner">
+            <div class="cart-header">
+                <div>
+                    <h2>Себет</h2>
+                    <p id="cart-summary">0 товар, 0 сом</p>
+                </div>
+                <button id="cart-close" class="icon-button" aria-label="Close cart">✕</button>
+            </div>
+
+            <div id="cart-items" class="cart-content"></div>
+
+            <div class="cart-footer">
+                <div class="total-row">
+                    <span>Жалпы:</span>
+                    <strong id="total-amount">0 сом</strong>
+                </div>
+                <div class="form-group">
+                    <input id="customer-name" type="text" placeholder="Атыңыз" autocomplete="name">
+                    <input id="customer-phone" type="tel" placeholder="Телефон номери (0...)">
+                </div>
+                <button id="order-submit" class="checkout-btn">ЗАКАЗДЫ ТАПШЫРУУ</button>
+            </div>
+        </div>
+    </aside>
+
+    <button id="admin-open" class="admin-entry" aria-label="Open admin panel">⚙️</button>
+
+    <div id="login-modal" class="modal" aria-hidden="true">
+        <div class="modal-card">
+            <h3>Админ кирүү</h3>
+            <input id="admin-password" type="password" placeholder="Пароль">
+            <div class="modal-actions">
+                <button id="admin-login" class="checkout-btn">КИРҮҮ</button>
+                <button id="login-close" class="secondary-btn">Жап</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-panel" class="modal" aria-hidden="true">
+        <div class="admin-window">
+            <div class="admin-header">
+                <div>
+                    <h2>💎 Башкаруу панели</h2>
+                    <p>Товарларды кошуу, өчүрүү жана түзөтүү.</p>
+                </div>
+                <button id="admin-close" class="icon-button" aria-label="Close admin panel">✕</button>
+            </div>
+
+            <div class="admin-body">
+                <input id="product-name" type="text" placeholder="Товардын аталышы">
+                <input id="product-price" type="number" placeholder="Баасы (сом)">
+                <label class="upload-label" for="product-image">
+                    <span id="upload-status">📸 Сүрөт тандаңыз</span>
+                </label>
+                <input id="product-image" type="file" accept="image/*" hidden>
+                <div id="image-preview" class="image-preview hidden"></div>
+                <button id="add-product" class="checkout-btn">Товарды кошуу</button>
+            </div>
+            <div id="admin-list" class="admin-list-scroll"></div>
+        </div>
+    </div>
+
+    <div id="qr-modal" class="modal" aria-hidden="true">
+        <div class="modal-card">
+            <h3>Сайтка QR код менен кирүү</h3>
+            <div id="qr-code" class="qr-container"></div>
+            <div class="modal-actions">
+                <button id="qr-close" class="secondary-btn">Жап</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast" aria-live="assertive" aria-atomic="true"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
