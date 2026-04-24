@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-label="Moto part image 3">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7fbff"/>
+      <stop offset="100%" stop-color="#dde7f3"/>
+    </linearGradient>
+    <linearGradient id="cb3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00bcd4"/>
+      <stop offset="100%" stop-color="#0d47a1"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="600" fill="url(#bg3)"/>
+  <path d="M120 380 C260 240, 340 510, 510 330 C640 190, 720 430, 820 270" fill="none" stroke="url(#cb3)" stroke-width="46" stroke-linecap="round"/>
+  <path d="M120 320 C260 180, 340 450, 510 270 C640 130, 720 370, 820 210" fill="none" stroke="#1e2a33" stroke-width="20" stroke-linecap="round"/>
+  <circle cx="170" cy="360" r="38" fill="#ffcc00"/>
+  <circle cx="780" cy="250" r="30" fill="#ff8f00"/>
+  <text x="110" y="540" font-family="Segoe UI, Arial, sans-serif" font-size="56" font-weight="700" fill="#20303a">KABEL SET</text>
+</svg>

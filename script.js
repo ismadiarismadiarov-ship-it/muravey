@@ -4,30 +4,37 @@ const ADMIN_PASS = "2026";
 const DB_KEY = 'muravey_pro_db';
 const CART_KEY = 'muravey_pro_cart';
 const SEARCH_KEYWORDS = 'элмото moto мото мото тетиктер motoparts';
+const IMAGE_FALLBACK = 'assets/products/placeholder.svg';
+const PRODUCT_IMAGE_MAP = {
+    1: 'assets/products/product-1.svg',
+    2: 'assets/products/product-2.svg',
+    3: 'assets/products/product-3.svg',
+    4: 'assets/products/product-4.svg'
+};
 const DEFAULT_PRODUCTS = [
     {
         id: 1,
         name: 'Электр гайканы',
         price: 350,
-        img: 'https://images.unsplash.com/photo-1514843566547-2a98de7e7c72?auto=format&fit=crop&w=640&q=80'
+        img: PRODUCT_IMAGE_MAP[1]
     },
     {
         id: 2,
         name: 'Металл плитка',
         price: 1120,
-        img: 'https://images.unsplash.com/photo-1555696955-6cef30c8d441?auto=format&fit=crop&w=640&q=80'
+        img: PRODUCT_IMAGE_MAP[2]
     },
     {
         id: 3,
         name: 'Кабель жиптери',
         price: 220,
-        img: 'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=640&q=80'
+        img: PRODUCT_IMAGE_MAP[3]
     },
     {
         id: 4,
         name: 'Мотор контроллери',
         price: 2950,
-        img: 'https://images.unsplash.com/photo-1593637931181-32f41d8f2073?auto=format&fit=crop&w=640&q=80'
+        img: PRODUCT_IMAGE_MAP[4]
     }
 ];
 
@@ -50,6 +57,41 @@ function getLocalData(key, fallback) {
 
 function setLocalData(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
+}
+
+function getDefaultImage(id) {
+    return PRODUCT_IMAGE_MAP[id] || IMAGE_FALLBACK;
+}
+
+function migrateProducts(products) {
+    if (!Array.isArray(products) || !products.length) {
+        return [...DEFAULT_PRODUCTS];
+    }
+
+    let changed = false;
+    const migrated = products.map((product, index) => {
+        const next = { ...product };
+        const currentImg = typeof next.img === 'string' ? next.img.trim() : '';
+
+        if (!currentImg) {
+            next.img = getDefaultImage(next.id || DEFAULT_PRODUCTS[index % DEFAULT_PRODUCTS.length].id);
+            changed = true;
+            return next;
+        }
+
+        if (currentImg.includes('images.unsplash.com')) {
+            next.img = getDefaultImage(next.id);
+            changed = true;
+        }
+
+        return next;
+    });
+
+    if (changed) {
+        setLocalData(DB_KEY, migrated);
+    }
+
+    return migrated;
 }
 
 function formatCurrency(value) {
@@ -96,7 +138,7 @@ function initialize() {
     refs.toast = $('#toast');
     refs.themeToggle = $('#theme-toggle');
 
-    state.products = getLocalData(DB_KEY, DEFAULT_PRODUCTS);
+    state.products = migrateProducts(getLocalData(DB_KEY, DEFAULT_PRODUCTS));
     state.filteredProducts = [...state.products];
     state.cart = getLocalData(CART_KEY, {});
 
@@ -158,10 +200,12 @@ function renderCatalog() {
 }
 
 function createProductCard(product) {
+    const imagePath = (typeof product.img === 'string' && product.img.trim()) ? product.img : IMAGE_FALLBACK;
+
     return `
         <article class="card">
             <div class="img-container">
-                <img src="${product.img}" alt="${product.name}">
+                <img src="${imagePath}" alt="${product.name}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${IMAGE_FALLBACK}';">
             </div>
             <div class="card-body">
                 <h3>${product.name}</h3>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-label="No image placeholder">
+  <defs>
+    <linearGradient id="phbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f4f6fb"/>
+      <stop offset="100%" stop-color="#dfe5ef"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="600" fill="url(#phbg)"/>
+  <rect x="220" y="130" width="460" height="300" rx="28" fill="#ffffff" stroke="#c7d2df" stroke-width="8"/>
+  <path d="M250 360 L360 250 L460 335 L540 280 L650 360" fill="none" stroke="#90a3b8" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="360" cy="220" r="24" fill="#ffb300"/>
+  <text x="450" y="500" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="48" font-weight="700" fill="#334155">SUROT JOK</text>
+</svg>

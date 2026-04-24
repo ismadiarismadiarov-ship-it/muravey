@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-label="Moto part image 2">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbfcf7"/>
+      <stop offset="100%" stop-color="#e4ecdc"/>
+    </linearGradient>
+    <linearGradient id="pl2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6b7b89"/>
+      <stop offset="100%" stop-color="#2a3842"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="600" fill="url(#bg2)"/>
+  <rect x="150" y="130" width="600" height="340" rx="26" fill="url(#pl2)"/>
+  <rect x="195" y="175" width="510" height="110" rx="14" fill="#9dafbc"/>
+  <rect x="195" y="300" width="250" height="120" rx="14" fill="#c8d3dc"/>
+  <rect x="455" y="300" width="250" height="120" rx="14" fill="#dbe3ea"/>
+  <circle cx="220" cy="420" r="10" fill="#ffcc00"/>
+  <circle cx="680" cy="180" r="10" fill="#ffcc00"/>
+  <text x="120" y="540" font-family="Segoe UI, Arial, sans-serif" font-size="56" font-weight="700" fill="#24323b">METAL PART</text>
+</svg>

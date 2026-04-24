@@ -117,7 +117,9 @@ button {
     width: 52px;
     height: 52px;
     border-radius: 14px;
-    background: var(--surface);
+    object-fit: cover;
+    object-position: center;
+    background: #0f1115;
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--border);
 }
@@ -359,12 +361,12 @@ button {
 
 .img-container {
     width: 100%;
-    height: 350px;
+    height: 290px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: var(--surface);
+    background: linear-gradient(135deg, #f9fbff 0%, #eaf0f9 100%);
     position: relative;
     border-radius: 8px 8px 0 0;
 }
@@ -372,7 +374,8 @@ button {
 .img-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    padding: 10px;
     border-radius: 4px;
 }
 
@@ -847,11 +850,11 @@ button {
 @media (max-width: 980px) {
     .header-grid {
         grid-template-columns: 1fr;
-        gap: 10px;
+        gap: 8px;
     }
 
     .brand {
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .search-panel {
@@ -862,13 +865,15 @@ button {
     .header-actions {
         order: 2;
         width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
+        justify-content: stretch;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 48px 48px;
+        gap: 10px;
     }
 
     .cart-trigger {
         width: 100%;
-        max-width: 340px;
+        max-width: none;
         justify-content: center;
     }
 
@@ -887,24 +892,46 @@ button {
         padding-bottom: 12px;
     }
 
+    .brand {
+        gap: 10px;
+    }
+
+    .brand-emblem {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+    }
+
     .logo {
-        font-size: 1.35rem;
+        font-size: 1.32rem;
     }
 
     .logo-accent {
         font-size: 0.76rem;
     }
 
+    .header-actions {
+        grid-template-columns: minmax(0, 1fr) 44px 44px;
+    }
+
+    .theme-toggle,
+    .qr-link {
+        width: 44px;
+        height: 44px;
+    }
+
     .search-panel input {
-        padding: 11px 12px;
+        padding: 12px 12px;
+        font-size: 0.94rem;
     }
 
     .search-panel button {
-        padding: 0 18px;
+        padding: 0 16px;
+        font-size: 0.95rem;
     }
 
     .banner {
-        padding-top: 14px;
+        padding-top: 8px;
     }
 
     .banner h1 {
@@ -925,7 +952,12 @@ button {
     }
 
     .img-container {
-        height: 280px;
+        height: 200px;
+        border-radius: 8px;
+    }
+
+    .img-container img {
+        padding: 8px;
     }
 
     .cart-panel {

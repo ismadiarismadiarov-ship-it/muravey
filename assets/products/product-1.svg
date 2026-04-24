@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-label="Moto part image 1">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6f9ff"/>
+      <stop offset="100%" stop-color="#dfe8f7"/>
+    </linearGradient>
+    <linearGradient id="gl1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffcc00"/>
+      <stop offset="100%" stop-color="#ff8f00"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="600" fill="url(#bg1)"/>
+  <circle cx="730" cy="120" r="90" fill="#ffffff" opacity="0.75"/>
+  <rect x="140" y="180" width="620" height="250" rx="30" fill="#101418"/>
+  <rect x="180" y="220" width="540" height="170" rx="20" fill="#1f2933"/>
+  <rect x="220" y="255" width="460" height="100" rx="14" fill="url(#gl1)"/>
+  <circle cx="280" cy="305" r="34" fill="#0f1720"/>
+  <circle cx="620" cy="305" r="34" fill="#0f1720"/>
+  <text x="80" y="530" font-family="Segoe UI, Arial, sans-serif" font-size="56" font-weight="700" fill="#1f2933">ELEKTRO BLOK</text>
+</svg>
