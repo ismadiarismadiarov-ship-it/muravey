@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-04-24T08:56:34.771Z",
+  "updatedAt": "2026-04-24T08:57:16.537Z",
   "products": [
     {
-      "id": 1777020992838,
+      "id": 1777021035105,
       "name": "покрышка с диском",
       "price": 2500,
-      "imagePath": "assets/uploads/product-1777020992838-1777020992842.jpeg",
-      "imageVersion": 1777020992842,
-      "updatedAt": "2026-04-24T08:56:34.770Z"
+      "imagePath": "assets/uploads/product-1777021035105-1777021035107.jpeg",
+      "imageVersion": 1777021035107,
+      "updatedAt": "2026-04-24T08:57:16.537Z"
     },
     {
       "id": 101,
