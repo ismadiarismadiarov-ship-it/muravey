@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ЭлМОТО Админ</title>
-    <meta name="description" content="ЭлМОТО админ барагы. Товарларды кошуу жана өчүрүү.">
+    <meta name="description" content="ЭлМОТО админ барагы. Товарлар GitHub'да сакталат жана бардык түзмөктө бирдей көрүнөт.">
     <meta name="robots" content="noindex, nofollow">
     <link rel="icon" type="image/jpeg" href="assets/emoto-logo.jpeg">
     <link rel="apple-touch-icon" href="assets/emoto-logo.jpeg">
@@ -25,6 +25,7 @@
             <div></div>
             <div class="header-actions">
                 <a href="index.html" class="qr-top-link">Сайтка кайтуу</a>
+                <a href="qr.html" class="qr-top-link">QR</a>
             </div>
         </div>
     </header>
@@ -32,7 +33,7 @@
     <main class="container admin-page">
         <section id="login-card" class="admin-card auth-card">
             <h1>Админ кирүү</h1>
-            <p>Панелге кирүү үчүн пароль жазыңыз.</p>
+            <p>Админ пароль киргизиңиз.</p>
             <div class="auth-form">
                 <input id="admin-password" type="password" placeholder="Пароль">
                 <button id="admin-login-btn" class="checkout-btn">КИРҮҮ</button>
@@ -43,9 +44,20 @@
             <div class="admin-panel-head">
                 <div>
                     <h2>Товар башкаруу</h2>
-                    <p>Товар кошуу, өчүрүү жана сүрөттү жаңыртуу.</p>
+                    <p>Товарлар жана сүрөттөр GitHub серверинде сакталат.</p>
                 </div>
                 <button id="admin-logout" class="secondary-btn">Чыгуу</button>
+            </div>
+
+            <div class="server-box">
+                <h3>Сервер туташуу (GitHub API)</h3>
+                <p class="muted">Repo укугу бар Personal Access Token киргизиңиз. Бул токен админ браузеринде гана сакталат.</p>
+                <div class="server-grid">
+                    <input id="github-token" type="password" placeholder="GitHub token (ghp_...)">
+                    <button id="save-token" class="checkout-btn">Туташуу</button>
+                    <button id="sync-now" class="secondary-btn">Азыр жаңыртуу</button>
+                </div>
+                <p id="sync-status" class="sync-status">Синхрон күтүүдө...</p>
             </div>
 
             <div class="admin-form-grid">
@@ -56,7 +68,7 @@
                 </label>
                 <input id="product-image" type="file" accept="image/*" hidden>
                 <div id="image-preview" class="image-preview hidden"></div>
-                <button id="add-product" class="checkout-btn">Товарды кошуу</button>
+                <button id="add-product" class="checkout-btn">Товар кошуу</button>
             </div>
 
             <div id="admin-list" class="admin-list-grid"></div>

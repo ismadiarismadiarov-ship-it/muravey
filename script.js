@@ -1,27 +1,56 @@
 const TG_TOKEN = "8425959254:AAEX4_b-HxV-scwVXBMH5lXB_l4lIQgjdnI";
 const TG_ID = "6552625844";
-const DB_KEY = 'muravey_pro_db';
 const CART_KEY = 'muravey_pro_cart';
 const SEARCH_KEYWORDS = 'элмото moto мото мото тетиктер motoparts';
 const IMAGE_FALLBACK = 'assets/products/placeholder.svg';
-const PRODUCT_IMAGE_MAP = {
-    1: 'assets/products/product-1.svg',
-    2: 'assets/products/product-2.svg',
-    3: 'assets/products/product-3.svg',
-    4: 'assets/products/product-4.svg'
-};
 
-const DEFAULT_PRODUCTS = [
-    { id: 1, name: 'Электр гайканы', price: 350, img: PRODUCT_IMAGE_MAP[1] },
-    { id: 2, name: 'Металл плитка', price: 1120, img: PRODUCT_IMAGE_MAP[2] },
-    { id: 3, name: 'Кабель жиптери', price: 220, img: PRODUCT_IMAGE_MAP[3] },
-    { id: 4, name: 'Мотор контроллери', price: 2950, img: PRODUCT_IMAGE_MAP[4] }
+const REPO_OWNER = 'ismadiarismadiarov-ship-it';
+const REPO_NAME = 'muravey';
+const REPO_BRANCH = 'main';
+const RAW_BASE = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}`;
+const PRODUCTS_ENDPOINT = `${RAW_BASE}/products.json`;
+const PRODUCTS_REFRESH_MS = 20000;
+
+const FALLBACK_PRODUCTS = [
+    {
+        id: 101,
+        name: 'тормозной колотка',
+        price: 400,
+        imagePath: 'assets/products/brake-shoe.jpeg',
+        imageVersion: 1745486400001,
+        updatedAt: '2026-04-24T09:20:00.000Z'
+    },
+    {
+        id: 102,
+        name: 'задный стоп',
+        price: 500,
+        imagePath: 'assets/products/rear-stop.jpeg',
+        imageVersion: 1745486400002,
+        updatedAt: '2026-04-24T09:20:00.000Z'
+    },
+    {
+        id: 103,
+        name: 'реле',
+        price: 180,
+        imagePath: 'assets/products/relay.jpeg',
+        imageVersion: 1745486400003,
+        updatedAt: '2026-04-24T09:20:00.000Z'
+    },
+    {
+        id: 104,
+        name: 'передный осс',
+        price: 1200,
+        imagePath: 'assets/products/front-hub.jpeg',
+        imageVersion: 1745486400004,
+        updatedAt: '2026-04-24T09:20:00.000Z'
+    }
 ];
 
 const state = {
     products: [],
+    filteredProducts: [],
     cart: {},
-    filteredProducts: []
+    lastDataStamp: ''
 };
 
 const refs = {};
@@ -38,51 +67,120 @@ function setLocalData(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
 }
 
-function getDefaultImage(id) {
-    return PRODUCT_IMAGE_MAP[id] || IMAGE_FALLBACK;
-}
-
-function migrateProducts(products) {
-    if (!Array.isArray(products) || !products.length) {
-        return [...DEFAULT_PRODUCTS];
-    }
-
-    let changed = false;
-    const migrated = products.map((product, index) => {
-        const next = { ...product };
-        const currentImg = typeof next.img === 'string' ? next.img.trim() : '';
-
-        if (!currentImg) {
-            next.img = getDefaultImage(next.id || DEFAULT_PRODUCTS[index % DEFAULT_PRODUCTS.length].id);
-            changed = true;
-            return next;
-        }
-
-        if (currentImg.includes('images.unsplash.com')) {
-            next.img = getDefaultImage(next.id);
-            changed = true;
-        }
-
-        return next;
-    });
-
-    if (changed) {
-        setLocalData(DB_KEY, migrated);
-    }
-
-    return migrated;
-}
-
 function formatCurrency(value) {
-    return `${value.toLocaleString()} сом`;
+    return `${Number(value || 0).toLocaleString()} сом`;
 }
 
 function showToast(message) {
     const toast = refs.toast;
+    if (!toast) return;
     toast.textContent = message;
     toast.classList.add('show');
     clearTimeout(toast.hideTimer);
     toast.hideTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+}
+
+function resolveAssetUrl(path) {
+    if (!path) return IMAGE_FALLBACK;
+    if (/^https?:\/\//i.test(path)) return path;
+
+    const normalized = String(path).replace(/^\/+/, '');
+
+    if (window.location.hostname.includes('github.io')) {
+        return `${RAW_BASE}/${normalized}`;
+    }
+
+    return normalized;
+}
+
+function withVersion(url, version) {
+    const stamp = version || Date.now();
+    return `${url}${url.includes('?') ? '&' : '?'}v=${encodeURIComponent(stamp)}`;
+}
+
+function normalizeProduct(item) {
+    const id = Number(item.id || Date.now());
+    const imagePath = item.imagePath || item.img || IMAGE_FALLBACK;
+
+    return {
+        id,
+        name: String(item.name || '').trim() || 'Товар',
+        price: Number(item.price || 0),
+        imagePath,
+        imageVersion: Number(item.imageVersion || 0) || Date.now(),
+        updatedAt: item.updatedAt || new Date().toISOString()
+    };
+}
+
+function normalizeProductsPayload(payload) {
+    const productsArray = Array.isArray(payload)
+        ? payload
+        : Array.isArray(payload?.products)
+            ? payload.products
+            : [];
+
+    return productsArray.map(normalizeProduct);
+}
+
+function applyFilter(query = refs.searchInput?.value || '') {
+    const normalizedQuery = query.trim().toLowerCase();
+
+    if (!normalizedQuery) {
+        state.filteredProducts = [...state.products];
+        return;
+    }
+
+    state.filteredProducts = state.products.filter(product => {
+        const searchable = `${product.name} ${SEARCH_KEYWORDS}`.toLowerCase();
+        return searchable.includes(normalizedQuery);
+    });
+}
+
+async function fetchProductsFromServer() {
+    const response = await fetch(withVersion(PRODUCTS_ENDPOINT, Date.now()), {
+        cache: 'no-store'
+    });
+
+    if (!response.ok) {
+        throw new Error(`Products fetch failed: ${response.status}`);
+    }
+
+    return response.json();
+}
+
+async function loadProducts(options = {}) {
+    const { silent = false } = options;
+
+    try {
+        const payload = await fetchProductsFromServer();
+        const products = normalizeProductsPayload(payload);
+        const stamp = JSON.stringify(products.map(item => [item.id, item.name, item.price, item.imagePath, item.imageVersion]));
+
+        if (stamp === state.lastDataStamp) {
+            return;
+        }
+
+        state.lastDataStamp = stamp;
+        state.products = products;
+        applyFilter();
+        renderCatalog();
+
+        if (!silent) {
+            showToast('Товарлар жаңыртылды');
+        }
+    } catch (error) {
+        console.error(error);
+
+        if (!state.products.length) {
+            state.products = FALLBACK_PRODUCTS.map(normalizeProduct);
+            applyFilter();
+            renderCatalog();
+        }
+
+        if (!silent) {
+            showToast('Серверден жүктөөдө ката чыкты, камдык товарлар көрсөтүлдү');
+        }
+    }
 }
 
 function initialize() {
@@ -103,14 +201,14 @@ function initialize() {
     refs.toast = $('#toast');
     refs.themeToggle = $('#theme-toggle');
 
-    state.products = migrateProducts(getLocalData(DB_KEY, DEFAULT_PRODUCTS));
-    state.filteredProducts = [...state.products];
     state.cart = getLocalData(CART_KEY, {});
 
     bindEvents();
-    renderCatalog();
     renderCart();
     loadTheme();
+    loadProducts({ silent: true });
+
+    setInterval(() => loadProducts({ silent: true }), PRODUCTS_REFRESH_MS);
 }
 
 function bindEvents() {
@@ -130,14 +228,18 @@ function bindEvents() {
             toggleCart(false);
         }
     });
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+            loadProducts({ silent: true });
+        }
+    });
+
+    window.addEventListener('focus', () => loadProducts({ silent: true }));
 }
 
 function handleSearch() {
-    const query = refs.searchInput.value.trim().toLowerCase();
-    state.filteredProducts = state.products.filter(product => {
-        const searchable = `${product.name} ${SEARCH_KEYWORDS}`.toLowerCase();
-        return searchable.includes(query);
-    });
+    applyFilter(refs.searchInput.value);
     renderCatalog();
 }
 
@@ -145,7 +247,7 @@ function renderCatalog() {
     refs.productTotal.textContent = state.filteredProducts.length;
 
     if (!state.filteredProducts.length) {
-        refs.productList.innerHTML = `<div class="empty-state"><strong>Товар табылбады</strong><p>Сөздү башкача жазып көрүңүз.</p></div>`;
+        refs.productList.innerHTML = `<div class="empty-state"><strong>Товар табылбады</strong><p>Издөөнү башкача жазып көрүңүз.</p></div>`;
         return;
     }
 
@@ -156,12 +258,13 @@ function renderCatalog() {
 }
 
 function createProductCard(product) {
-    const imagePath = typeof product.img === 'string' && product.img.trim() ? product.img : IMAGE_FALLBACK;
+    const rawImageUrl = resolveAssetUrl(product.imagePath);
+    const imageUrl = withVersion(rawImageUrl, product.imageVersion || product.updatedAt || Date.now());
 
     return `
         <article class="card">
             <div class="img-container">
-                <img src="${imagePath}" alt="${product.name}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${IMAGE_FALLBACK}';">
+                <img src="${imageUrl}" alt="${product.name}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${IMAGE_FALLBACK}';">
             </div>
             <div class="card-body">
                 <h3>${product.name}</h3>
@@ -174,8 +277,8 @@ function createProductCard(product) {
 
 function renderCart() {
     const entries = Object.values(state.cart);
-    const totalCount = entries.reduce((sum, item) => sum + item.quantity, 0);
-    const totalAmount = entries.reduce((sum, item) => sum + item.quantity * item.price, 0);
+    const totalCount = entries.reduce((sum, item) => sum + Number(item.quantity || 0), 0);
+    const totalAmount = entries.reduce((sum, item) => sum + Number(item.quantity || 0) * Number(item.price || 0), 0);
 
     refs.cartCount.textContent = totalCount;
     refs.cartSummary.textContent = `${totalCount} товар, ${formatCurrency(totalAmount)}`;
@@ -212,6 +315,7 @@ function createCartRow(item) {
 function handleCartAction(event) {
     const action = event.target.dataset.action;
     const id = Number(event.target.dataset.id);
+
     if (!id) return;
 
     if (action === 'add') {
@@ -226,7 +330,7 @@ function handleCartAction(event) {
 }
 
 function addToCart(id) {
-    const product = state.products.find(item => item.id === id);
+    const product = state.products.find(item => Number(item.id) === id);
     if (!product) {
         showToast('Товар табылбады');
         return;
@@ -235,7 +339,12 @@ function addToCart(id) {
     if (state.cart[id]) {
         state.cart[id].quantity += 1;
     } else {
-        state.cart[id] = { ...product, quantity: 1 };
+        state.cart[id] = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            quantity: 1
+        };
     }
 
     saveCart();
@@ -247,7 +356,11 @@ function addToCart(id) {
 function changeQuantity(id, delta) {
     if (!state.cart[id]) return;
     state.cart[id].quantity += delta;
-    if (state.cart[id].quantity <= 0) delete state.cart[id];
+
+    if (state.cart[id].quantity <= 0) {
+        delete state.cart[id];
+    }
+
     saveCart();
     renderCart();
 }
@@ -292,6 +405,7 @@ function validatePhone(value) {
 async function sendOrder(name, phone, cartItems) {
     const itemLines = cartItems.map((item, index) => `${index + 1}. ${item.name} x${item.quantity} - ${formatCurrency(item.price * item.quantity)}`).join('\n');
     const totalAmount = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
     const message = `📦 *ЖАҢЫ ЗАКАЗ (ЭлМОТО)*\n\n👤 *Кардар:* ${name}\n📞 *Тел:* ${phone}\n\n*Товарлар:*\n${itemLines}\n\n💰 *Жалпы:* ${formatCurrency(totalAmount)}`;
 
     try {

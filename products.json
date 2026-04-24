@@ -1,0 +1,37 @@
+{
+  "updatedAt": "2026-04-24T09:20:00.000Z",
+  "products": [
+    {
+      "id": 101,
+      "name": "тормозной колотка",
+      "price": 400,
+      "imagePath": "assets/products/brake-shoe.jpeg",
+      "imageVersion": 1745486400001,
+      "updatedAt": "2026-04-24T09:20:00.000Z"
+    },
+    {
+      "id": 102,
+      "name": "задный стоп",
+      "price": 500,
+      "imagePath": "assets/products/rear-stop.jpeg",
+      "imageVersion": 1745486400002,
+      "updatedAt": "2026-04-24T09:20:00.000Z"
+    },
+    {
+      "id": 103,
+      "name": "реле",
+      "price": 180,
+      "imagePath": "assets/products/relay.jpeg",
+      "imageVersion": 1745486400003,
+      "updatedAt": "2026-04-24T09:20:00.000Z"
+    },
+    {
+      "id": 104,
+      "name": "передный осс",
+      "price": 1200,
+      "imagePath": "assets/products/front-hub.jpeg",
+      "imageVersion": 1745486400004,
+      "updatedAt": "2026-04-24T09:20:00.000Z"
+    }
+  ]
+}
