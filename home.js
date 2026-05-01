@@ -97,8 +97,9 @@ function openPanel(type) {
         favorites: 'Избранное'
     };
 
-    refs.panelTitle.textContent = titleMap[type] || 'Маалымат';
-    refs.panelBody.innerHTML = buildPanelRows(type);
+    const safeType = titleMap[type] ? type : 'orders';
+    refs.panelTitle.textContent = titleMap[safeType];
+    refs.panelBody.innerHTML = buildPanelRows(safeType);
     refs.quickPanel.hidden = false;
     document.body.style.overflow = 'hidden';
 }
