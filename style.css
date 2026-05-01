@@ -1096,3 +1096,36 @@ body.dark-mode .quantity-control button {
         color: #ffffff;
     }
 }
+
+@media (max-width: 600px) {
+    .market-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .card {
+        border-radius: 10px;
+    }
+
+    .img-container {
+        height: 170px;
+    }
+
+    .card-body {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .card-body h3 {
+        font-size: 0.95rem;
+    }
+
+    .card-body .price {
+        font-size: 1.15rem;
+    }
+
+    .card-body button {
+        font-size: 0.9rem;
+        padding: 10px 0;
+    }
+}
