@@ -45,12 +45,34 @@
 
     <script>
         (function renderQrPage() {
-            const homeUrl = new URL('index.html', window.location.href).href;
-            const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=${encodeURIComponent(homeUrl)}`;
+            const PUBLIC_HOME_URL = 'https://ismadiarismadiarov-ship-it.github.io/muravey/';
+            const LOCAL_HOSTS = new Set(['localhost', '127.0.0.1']);
+            const isLocal = LOCAL_HOSTS.has(window.location.hostname);
+            const homeUrl = isLocal ? PUBLIC_HOME_URL : new URL('./', window.location.href).href;
             const qrCode = document.getElementById('qr-code');
             const qrText = document.getElementById('qr-url');
+            const encodedUrl = encodeURIComponent(homeUrl);
+            const qrProviders = [
+                `https://quickchart.io/qr?size=320&margin=2&text=${encodedUrl}`,
+                `https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=24&data=${encodedUrl}`
+            ];
 
-            qrCode.innerHTML = `<img src="${qrImageUrl}" alt="ЭлМОТО QR коду">`;
+            let providerIndex = 0;
+            const qrImage = new Image(220, 220);
+            qrImage.alt = 'ЭлМОТО QR коду';
+
+            qrImage.onerror = function handleQrError() {
+                providerIndex += 1;
+                if (providerIndex < qrProviders.length) {
+                    qrImage.src = qrProviders[providerIndex];
+                    return;
+                }
+                qrCode.innerHTML = '<p style="color:#9e9e9e;text-align:center;">QR жүктөлбөй калды. Төмөнкү шилтеме менен кириңиз.</p>';
+            };
+
+            qrImage.src = qrProviders[providerIndex];
+            qrCode.innerHTML = '';
+            qrCode.appendChild(qrImage);
             qrText.textContent = homeUrl;
         }());
     </script>
