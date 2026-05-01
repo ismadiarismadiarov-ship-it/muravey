@@ -43,9 +43,9 @@
             </form>
 
             <div class="header-tools">
-                <button class="tool-btn" data-panel-open="orders" type="button">Заказы <span id="orders-count">0</span></button>
-                <button class="tool-btn" data-panel-open="favorites" type="button">Избранное <span id="favorites-count">0</span></button>
-                <button class="tool-btn" data-panel-open="cart" type="button">Карзина <span id="cart-count">0</span></button>
+                <button class="tool-btn" data-nav-target="orders" type="button">Заказы <span id="orders-count">0</span></button>
+                <button class="tool-btn" data-nav-target="favorites" type="button">Избранное <span id="favorites-count">0</span></button>
+                <button class="tool-btn" data-nav-target="cart" type="button">Карзина <span id="cart-count">0</span></button>
             </div>
         </div>
 
@@ -107,7 +107,7 @@
             </div>
 
             <aside class="ad-column" aria-label="Реклама">
-                <h2>Реклама оң жакта</h2>
+                <h2>Күндүн сунуштары</h2>
                 <div class="ad-window">
                     <div class="ad-track">
                         <a href="shop.html" class="ad-card">
@@ -140,15 +140,15 @@
         </section>
 
         <section class="feature-row">
-            <button class="feature-tile" type="button" data-panel-open="cart">
+            <button class="feature-tile" type="button" data-nav-target="cart">
                 <strong>Карзина</strong>
                 <span id="cart-count-tile">0 товар</span>
             </button>
-            <button class="feature-tile" type="button" data-panel-open="favorites">
+            <button class="feature-tile" type="button" data-nav-target="favorites">
                 <strong>Избранное</strong>
                 <span id="favorites-count-tile">0 товар</span>
             </button>
-            <button class="feature-tile" type="button" data-panel-open="orders">
+            <button class="feature-tile" type="button" data-nav-target="orders">
                 <strong>Заказы</strong>
                 <span id="orders-count-tile">0 заказ</span>
             </button>
@@ -197,23 +197,21 @@
                 </article>
             </div>
         </section>
-    </main>
 
-    <section id="quick-panel" class="quick-panel" hidden>
-        <div class="panel-card">
-            <div class="panel-head">
-                <h3 id="panel-title">Маалымат</h3>
-                <button id="panel-close" type="button" aria-label="Жабуу">✕</button>
+        <section id="favorites-section" class="recommended favorites-board">
+            <div class="section-head">
+                <h2>Избранное тизмеси</h2>
+                <a href="shop.html?panel=orders">Заказдарга өтүү</a>
             </div>
-            <div id="panel-body" class="panel-body"></div>
-        </div>
-    </section>
+            <div id="favorites-grid" class="favorites-grid"></div>
+        </section>
+    </main>
 
     <nav class="mobile-nav">
         <a href="#top">Башкы бет</a>
-        <button type="button" data-panel-open="favorites">Избранное</button>
-        <button type="button" data-panel-open="cart">Карзина</button>
-        <button type="button" data-panel-open="orders">Заказы</button>
+        <button type="button" data-nav-target="favorites">Избранное</button>
+        <button type="button" data-nav-target="cart">Карзина</button>
+        <button type="button" data-nav-target="orders">Заказы</button>
         <a href="shop.html?panel=orders">Дүкөн</a>
     </nav>
 

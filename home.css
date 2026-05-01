@@ -602,60 +602,73 @@ a {
     background: #ff4f7a;
 }
 
-.quick-panel {
-    position: fixed;
-    inset: 0;
-    z-index: 90;
-    background: rgba(6, 13, 24, 0.66);
+.favorites-board {
+    margin-top: 14px;
+}
+
+.favorites-grid {
     display: grid;
-    place-items: center;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.favorites-empty {
+    grid-column: 1 / -1;
+    border: 1px dashed #c7dbfa;
+    border-radius: 12px;
     padding: 16px;
+    text-align: center;
+    background: #f6fbff;
 }
 
-.panel-card {
-    width: min(500px, 100%);
-    max-height: 82vh;
-    overflow: auto;
-    background: linear-gradient(145deg, #ffffff 0%, #f8fbff 100%);
-    border-radius: 18px;
-    border: 1px solid #d5e6fd;
-    padding: 16px;
-    box-shadow: 0 18px 48px rgba(2, 18, 43, 0.3);
+.favorites-empty strong {
+    display: block;
+    margin-bottom: 6px;
 }
 
-.panel-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-}
-
-.panel-head h3 {
+.favorites-empty p {
     margin: 0;
-    font-size: 1.2rem;
+    color: var(--h-muted);
 }
 
-.panel-head button {
-    border: 0;
-    background: #eef4ff;
-    width: 34px;
-    height: 34px;
-    border-radius: 999px;
-    cursor: pointer;
-}
-
-.panel-body {
-    margin: 10px 0;
+.favorite-card {
+    border: 1px solid #d9e8fd;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #ffffff;
     display: grid;
-    gap: 8px;
-    min-height: 56px;
+    gap: 0;
 }
 
-.panel-item {
-    border: 1px solid #dce8fa;
-    border-radius: 10px;
+.favorite-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+}
+
+.favorite-copy {
     padding: 10px;
-    background: #f8fbff;
+}
+
+.favorite-copy h3 {
+    margin: 0 0 4px;
+    font-size: 0.95rem;
+}
+
+.favorite-copy p {
+    margin: 0;
+    color: #145fcd;
+    font-weight: 800;
+}
+
+.favorite-card a {
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+    background: linear-gradient(135deg, #0f69ff 0%, #0a4fcb 100%);
+    color: #fff;
+    font-weight: 800;
 }
 
 .mobile-nav {
@@ -721,6 +734,10 @@ a {
     }
 
     .rec-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .favorites-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
@@ -848,5 +865,10 @@ a {
 
     .mobile-nav {
         display: grid;
+    }
+
+    .favorites-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
     }
 }

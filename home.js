@@ -51,13 +51,10 @@ function refreshCounters() {
 }
 
 function setSlide(index) {
-    const slides = refs.slides;
-    const dots = refs.dots;
-    if (!slides.length) return;
-
-    currentSlide = (index + slides.length) % slides.length;
-    slides.forEach((slide, idx) => slide.classList.toggle('is-active', idx === currentSlide));
-    dots.forEach((dot, idx) => dot.classList.toggle('is-active', idx === currentSlide));
+    if (!refs.slides.length) return;
+    currentSlide = (index + refs.slides.length) % refs.slides.length;
+    refs.slides.forEach((slide, idx) => slide.classList.toggle('is-active', idx === currentSlide));
+    refs.dots.forEach((dot, idx) => dot.classList.toggle('is-active', idx === currentSlide));
 }
 
 function startSlider() {
@@ -65,48 +62,40 @@ function startSlider() {
     sliderTimer = setInterval(() => setSlide(currentSlide + 1), 5000);
 }
 
-function buildPanelRows(type) {
-    if (type === 'cart' || type === 'orders') {
-        const entries = getCartEntries();
-        if (!entries.length) {
-            return '<div class="panel-item">Азырынча товар кошула элек.</div>';
-        }
-
-        const total = entries.reduce((sum, item) => sum + Number(item.price || 0) * Number(item.quantity || 0), 0);
-        const rows = entries.map(item => (
-            `<div class="panel-item"><strong>${item.name}</strong><br><span>${item.quantity} x ${formatMoney(item.price)} = ${formatMoney(item.quantity * item.price)}</span></div>`
-        )).join('');
-
-        return `${rows}<div class="panel-item"><strong>Жалпы: ${formatMoney(total)}</strong></div>`;
+function navigateToShop(target) {
+    if (target === 'orders' || target === 'cart') {
+        window.location.href = `shop.html?panel=${encodeURIComponent(target)}`;
+        return;
     }
 
+    if (target === 'favorites') {
+        refs.favoritesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+function renderFavoritesBoard() {
     const favorites = getFavorites();
+
     if (!favorites.length) {
-        return '<div class="panel-item">Избранное тизмеси бош.</div>';
+        refs.favoritesGrid.innerHTML = `
+            <div class="favorites-empty">
+                <strong>Избранное бош</strong>
+                <p>Жүрөкчөнү басып товар тандасаңыз, бул жерде көрүнөт.</p>
+            </div>
+        `;
+        return;
     }
 
-    return favorites.map(item => (
-        `<div class="panel-item"><strong>${item.name}</strong><br><span>${formatMoney(item.price)}</span></div>`
-    )).join('');
-}
-
-function openPanel(type) {
-    const titleMap = {
-        cart: 'Карзина',
-        orders: 'Заказы',
-        favorites: 'Избранное'
-    };
-
-    const safeType = titleMap[type] ? type : 'orders';
-    refs.panelTitle.textContent = titleMap[safeType];
-    refs.panelBody.innerHTML = buildPanelRows(safeType);
-    refs.quickPanel.hidden = false;
-    document.body.style.overflow = 'hidden';
-}
-
-function closePanel() {
-    refs.quickPanel.hidden = true;
-    document.body.style.overflow = '';
+    refs.favoritesGrid.innerHTML = favorites.map(item => `
+        <article class="favorite-card">
+            <img src="${item.image || 'assets/products/placeholder.svg'}" alt="${item.name}">
+            <div class="favorite-copy">
+                <h3>${item.name}</h3>
+                <p>${formatMoney(item.price)}</p>
+            </div>
+            <a href="shop.html?search=${encodeURIComponent(item.name)}">Заказ берүү</a>
+        </article>
+    `).join('');
 }
 
 function isFavorite(id) {
@@ -136,6 +125,7 @@ function toggleFavorite(button) {
     setFavorites(next);
     syncFavoriteButtons();
     refreshCounters();
+    renderFavoritesBoard();
 }
 
 function bindEvents() {
@@ -165,24 +155,18 @@ function bindEvents() {
         window.location.href = target;
     });
 
-    document.querySelectorAll('[data-panel-open]').forEach(control => {
-        control.addEventListener('click', () => {
-            openPanel(control.dataset.panelOpen);
-        });
-    });
-
-    refs.panelClose.addEventListener('click', closePanel);
-    refs.quickPanel.addEventListener('click', event => {
-        if (event.target === refs.quickPanel) closePanel();
+    document.querySelectorAll('[data-nav-target]').forEach(control => {
+        control.addEventListener('click', () => navigateToShop(control.dataset.navTarget));
     });
 
     refs.favoriteButtons.forEach(button => {
         button.addEventListener('click', () => toggleFavorite(button));
     });
 
-    window.addEventListener('storage', refreshCounters);
-    document.addEventListener('keydown', event => {
-        if (event.key === 'Escape') closePanel();
+    window.addEventListener('storage', () => {
+        refreshCounters();
+        syncFavoriteButtons();
+        renderFavoritesBoard();
     });
 }
 
@@ -190,6 +174,7 @@ function initRefs() {
     refs.searchForm = document.getElementById('home-search-form');
     refs.searchScope = document.getElementById('home-search-scope');
     refs.searchInput = document.getElementById('home-search-input');
+
     refs.cartCount = document.getElementById('cart-count');
     refs.ordersCount = document.getElementById('orders-count');
     refs.favoritesCount = document.getElementById('favorites-count');
@@ -202,11 +187,9 @@ function initRefs() {
     refs.slides = Array.from(document.querySelectorAll('.slide'));
     refs.dots = Array.from(document.querySelectorAll('#slide-dots button'));
 
-    refs.quickPanel = document.getElementById('quick-panel');
-    refs.panelTitle = document.getElementById('panel-title');
-    refs.panelBody = document.getElementById('panel-body');
-    refs.panelClose = document.getElementById('panel-close');
     refs.favoriteButtons = Array.from(document.querySelectorAll('.fav-toggle'));
+    refs.favoritesGrid = document.getElementById('favorites-grid');
+    refs.favoritesSection = document.getElementById('favorites-section');
 }
 
 function initialize() {
@@ -216,6 +199,7 @@ function initialize() {
     startSlider();
     syncFavoriteButtons();
     refreshCounters();
+    renderFavoritesBoard();
 }
 
 document.addEventListener('DOMContentLoaded', initialize);
