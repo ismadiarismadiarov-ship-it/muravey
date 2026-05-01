@@ -50,7 +50,8 @@ const state = {
     products: [],
     filteredProducts: [],
     cart: {},
-    lastDataStamp: ''
+    lastDataStamp: '',
+    pendingPanelOpen: false
 };
 
 const refs = {};
@@ -69,6 +70,16 @@ function setLocalData(key, value) {
 
 function formatCurrency(value) {
     return `${Number(value || 0).toLocaleString()} сом`;
+}
+
+function readRouteState() {
+    const params = new URLSearchParams(window.location.search);
+    const search = String(params.get('search') || '').trim();
+    const panel = String(params.get('panel') || '').trim().toLowerCase();
+    return {
+        search,
+        openCart: panel === 'cart' || panel === 'orders'
+    };
 }
 
 function showToast(message) {
@@ -202,11 +213,21 @@ function initialize() {
     refs.themeToggle = $('#theme-toggle');
 
     state.cart = getLocalData(CART_KEY, {});
+    const routeState = readRouteState();
+    state.pendingPanelOpen = routeState.openCart;
+    if (routeState.search) {
+        refs.searchInput.value = routeState.search;
+    }
 
     bindEvents();
     renderCart();
     loadTheme();
-    loadProducts({ silent: true });
+    loadProducts({ silent: true }).then(() => {
+        if (state.pendingPanelOpen) {
+            toggleCart(true);
+            state.pendingPanelOpen = false;
+        }
+    });
 
     setInterval(() => loadProducts({ silent: true }), PRODUCTS_REFRESH_MS);
 }

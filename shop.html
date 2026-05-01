@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЭлМОТО Маркет | Мото тетиктер жана заказ берүү</title>
+    <meta name="description" content="ЭлМОТО - мото тетиктерди табуу жана заказ берүү үчүн ыңгайлуу дүкөн. Сапаттуу moto тетиктер жана тез байланыш.">
+    <meta name="keywords" content="ЭлМОТО, Эл Мото, мото, moto, мото тетиктер, мотозапчасти, заказ, Кыргызстан">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#ff9800">
+    <meta property="og:title" content="ЭлМОТО Маркет | Мото тетиктер дүкөнү">
+    <meta property="og:description" content="ЭлМОТО сайтынан мото тетиктерди тандап, түз заказ бере аласыз.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ky_KG">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" type="image/jpeg" href="assets/emoto-logo.jpeg">
+    <link rel="apple-touch-icon" href="assets/emoto-logo.jpeg">
+    <meta property="og:image" content="assets/emoto-logo.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "ЭлМОТО",
+      "description": "ЭлМОТО - мото тетиктер дүкөнү жана тез заказ кызматы.",
+      "keywords": "ЭлМОТО, moto, мото, мото тетиктер, заказ",
+      "availableLanguage": ["ky", "ru"],
+      "areaServed": "KG"
+    }
+    </script>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container header-grid">
+            <div class="brand">
+                <img src="assets/emoto-logo.jpeg" alt="ЭлМОТО эмблемасы" class="brand-emblem">
+                <div class="brand-text">
+                    <span class="logo">ЭлМОТО</span>
+                    <span class="logo-accent">moto тетиктер</span>
+                </div>
+            </div>
+
+            <form id="search-form" class="search-panel" autocomplete="off">
+                <input id="search-input" type="search" placeholder="Мото тетик издөө..." aria-label="Мото товарларды издөө">
+                <button type="submit" class="search-btn">ТАБУУ</button>
+            </form>
+
+            <div class="header-actions">
+                <button id="cart-open" class="cart-trigger" aria-label="Open orders panel">
+                    <span class="icon">🛒</span>
+                    <span class="text">Заказдар</span>
+                    <span id="cart-count" class="cart-badge">0</span>
+                </button>
+
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+
+                <a href="qr.html" class="qr-link" aria-label="QR баракчасын ачуу">QR</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="banner">
+            <div>
+                <h1>ЭлМОТО мото тетиктери</h1>
+                <p>Сапаттуу moto тетиктер жана ишенимдүү сервис.</p>
+            </div>
+            <div class="hero-stats">
+                <div><strong id="product-total">0</strong> товар</div>
+                <div class="quick-service"><strong>Ыкчам</strong> тейлөө</div>
+            </div>
+        </section>
+
+        <section class="banner" style="padding-top:0;">
+            <div>
+                <a href="index.html" class="qr-top-link">Башкы бетке өтүү</a>
+            </div>
+        </section>
+
+        <section id="product-list" class="market-grid" aria-live="polite"></section>
+    </main>
+
+    <aside id="cart-panel" class="cart-panel" aria-hidden="true">
+        <div class="cart-inner">
+            <div class="cart-header">
+                <div>
+                    <h2>Заказдар</h2>
+                    <p id="cart-summary">0 товар, 0 сом</p>
+                </div>
+                <button id="cart-close" class="icon-button" aria-label="Close cart">✕</button>
+            </div>
+
+            <div id="cart-items" class="cart-content"></div>
+
+            <div class="cart-footer">
+                <div class="total-row">
+                    <span>Жалпы:</span>
+                    <strong id="total-amount">0 сом</strong>
+                </div>
+                <div class="form-group">
+                    <input id="customer-name" type="text" placeholder="Атыңыз" autocomplete="name">
+                    <input id="customer-phone" type="tel" placeholder="Телефон номери (0...)">
+                </div>
+                <button id="order-submit" class="checkout-btn">ЗАКАЗ БЕРҮҮ</button>
+            </div>
+        </div>
+    </aside>
+
+    <div id="toast" class="toast" aria-live="assertive" aria-atomic="true"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

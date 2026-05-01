@@ -3,107 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ЭлМОТО | Мото тетиктер жана заказ берүү</title>
-    <meta name="description" content="ЭлМОТО - мото тетиктерди табуу жана заказ берүү үчүн ыңгайлуу дүкөн. Сапаттуу moto тетиктер жана тез байланыш.">
-    <meta name="keywords" content="ЭлМОТО, Эл Мото, мото, moto, мото тетиктер, мотозапчасти, заказ, Кыргызстан">
+    <title>ЭлМОТО | Башкы бет</title>
+    <meta name="description" content="ЭлМОТО башкы бет: акциялар, реклама, карзина, избранное жана заказ бөлүмдөрү.">
+    <meta name="keywords" content="ЭлМОТО, мото, маркет, акция, заказ, карзина, избранное">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta name="theme-color" content="#ff9800">
-    <meta property="og:title" content="ЭлМОТО | Мото тетиктер дүкөнү">
-    <meta property="og:description" content="ЭлМОТО сайтынан мото тетиктерди тандап, түз заказ бере аласыз.">
+    <meta name="theme-color" content="#0f69ff">
+    <meta property="og:title" content="ЭлМОТО | Башкы бет">
+    <meta property="og:description" content="ЭлМОТО маркетинин башкы бети. Заказ, карзина, избранное жана акциялар.">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ky_KG">
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/jpeg" href="assets/emoto-logo.jpeg">
     <link rel="apple-touch-icon" href="assets/emoto-logo.jpeg">
     <meta property="og:image" content="assets/emoto-logo.jpeg">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Store",
-      "name": "ЭлМОТО",
-      "description": "ЭлМОТО - мото тетиктер дүкөнү жана тез заказ кызматы.",
-      "keywords": "ЭлМОТО, moto, мото, мото тетиктер, заказ",
-      "availableLanguage": ["ky", "ru"],
-      "areaServed": "KG"
-    }
-    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Russo+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home.css">
 </head>
-<body>
-
-    <header class="main-header">
-        <div class="container header-grid">
-            <div class="brand">
-                <img src="assets/emoto-logo.jpeg" alt="ЭлМОТО эмблемасы" class="brand-emblem">
-                <div class="brand-text">
-                    <span class="logo">ЭлМОТО</span>
-                    <span class="logo-accent">moto тетиктер</span>
+<body id="top">
+    <header class="home-header">
+        <div class="shell top-row">
+            <a href="shop.html" class="brand-block" aria-label="ЭлМОТО маркетке өтүү">
+                <img src="assets/emoto-logo.jpeg" alt="ЭлМОТО эмблемасы">
+                <div>
+                    <p class="brand-title">ЭлМОТО</p>
+                    <p class="brand-sub">мото маркет</p>
                 </div>
-            </div>
+            </a>
 
-            <form id="search-form" class="search-panel" autocomplete="off">
-                <input id="search-input" type="search" placeholder="Мото тетик издөө..." aria-label="Мото товарларды издөө">
-                <button type="submit" class="search-btn">ТАБУУ</button>
+            <form id="home-search-form" class="home-search">
+                <select id="home-search-scope" aria-label="Издөө категориясы">
+                    <option value="all">Бардыгы</option>
+                    <option value="parts">Мото тетиктер</option>
+                    <option value="service">Сервис</option>
+                </select>
+                <input id="home-search-input" type="search" placeholder="ЭлМОТО маркеттен издөө...">
+                <button type="submit">Издөө</button>
             </form>
 
-            <div class="header-actions">
-                <button id="cart-open" class="cart-trigger" aria-label="Open orders panel">
-                    <span class="icon">🛒</span>
-                    <span class="text">Заказдар</span>
-                    <span id="cart-count" class="cart-badge">0</span>
-                </button>
-
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
-
-                <a href="qr.html" class="qr-link" aria-label="QR баракчасын ачуу">QR</a>
+            <div class="header-tools">
+                <button class="tool-btn" data-panel-open="orders" type="button">Заказы <span id="orders-count">0</span></button>
+                <button class="tool-btn" data-panel-open="favorites" type="button">Избранное <span id="favorites-count">0</span></button>
+                <button class="tool-btn" data-panel-open="cart" type="button">Карзина <span id="cart-count">0</span></button>
             </div>
+        </div>
+
+        <div class="shell category-row">
+            <button type="button" class="cat-pill active">Сделано в Кыргызстане</button>
+            <button type="button" class="cat-pill">Электр тетиктер</button>
+            <button type="button" class="cat-pill">Тормоз системасы</button>
+            <button type="button" class="cat-pill">Жарык жана стоптор</button>
+            <button type="button" class="cat-pill">Руль жана аксессуар</button>
+            <a href="qr.html" class="cat-pill link-pill">QR</a>
+            <a href="admin.html" class="cat-pill link-pill">Админ</a>
         </div>
     </header>
 
-    <main class="container">
-        <section class="banner">
-            <div>
-                <h1>ЭлМОТО мото тетиктери</h1>
-                <p>Сапаттуу moto тетиктер жана ишенимдүү сервис.</p>
+    <main class="shell home-main">
+        <section class="hero-layout">
+            <div class="hero-slider" aria-label="ЭлМОТО акциялары">
+                <div id="hero-slides" class="hero-slides">
+                    <article class="slide is-active">
+                        <div class="slide-copy">
+                            <p class="eyebrow">ЭлМОТО СЕЗОН 2026</p>
+                            <h1>Мото тетиктерге чоң арзандатуу</h1>
+                            <p>Запастарды жаңыртыңыз: сапаттуу тетиктер жана тез заказ.</p>
+                            <a href="shop.html" class="primary-link">ЭлМОТО Маркетке өтүү</a>
+                        </div>
+                        <img src="assets/products/rear-stop.jpeg" alt="Акция баннери">
+                    </article>
+
+                    <article class="slide">
+                        <div class="slide-copy">
+                            <p class="eyebrow">ТЕЗ ЖЕТКИРҮҮ</p>
+                            <h1>Заказ бериңиз, дароо байланышабыз</h1>
+                            <p>Карзина жана заказ бөлүмү толук иштейт.</p>
+                            <a href="shop.html?panel=orders" class="primary-link">Заказдарга өтүү</a>
+                        </div>
+                        <img src="assets/products/front-hub.jpeg" alt="Заказ баннери">
+                    </article>
+
+                    <article class="slide">
+                        <div class="slide-copy">
+                            <p class="eyebrow">ЖАҢЫ ПОЗИЦИЯЛАР</p>
+                            <h1>Эң керектүү мото тетиктер бир жерде</h1>
+                            <p>Издөөнү колдонуңуз жана керектүү товарды тез табыңыз.</p>
+                            <a href="shop.html?search=мото" class="primary-link">Мото тетиктерди табуу</a>
+                        </div>
+                        <img src="assets/products/relay.jpeg" alt="Жаңы товар баннери">
+                    </article>
+                </div>
+
+                <div class="slider-controls">
+                    <button id="slide-prev" type="button" aria-label="Мурунку баннер">←</button>
+                    <div id="slide-dots" class="dots" aria-label="Слайд тандоо">
+                        <button type="button" class="is-active" data-slide="0"></button>
+                        <button type="button" data-slide="1"></button>
+                        <button type="button" data-slide="2"></button>
+                    </div>
+                    <button id="slide-next" type="button" aria-label="Кийинки баннер">→</button>
+                </div>
             </div>
-            <div class="hero-stats">
-                <div><strong id="product-total">0</strong> товар</div>
-                <div class="quick-service"><strong>Ыкчам</strong> тейлөө</div>
-            </div>
+
+            <aside class="ad-column" aria-label="Реклама">
+                <h2>Реклама оң жакта</h2>
+                <div class="ad-window">
+                    <div class="ad-track">
+                        <a href="shop.html" class="ad-card">
+                            <img src="assets/products/brake-shoe.jpeg" alt="Тормоз акциясы">
+                            <span>Тормоз тетиктер -25%</span>
+                        </a>
+                        <a href="shop.html" class="ad-card">
+                            <img src="assets/products/rear-stop.jpeg" alt="Стоп акциясы">
+                            <span>LED стоп акция</span>
+                        </a>
+                        <a href="shop.html" class="ad-card">
+                            <img src="assets/products/relay.jpeg" alt="Реле акциясы">
+                            <span>Реле жана электро блок</span>
+                        </a>
+                        <a href="shop.html" class="ad-card">
+                            <img src="assets/products/front-hub.jpeg" alt="Осс акциясы">
+                            <span>Передний осс жеңил баада</span>
+                        </a>
+                        <a href="shop.html" class="ad-card">
+                            <img src="assets/products/brake-shoe.jpeg" alt="Тормоз акциясы 2">
+                            <span>Күндүн сунушу</span>
+                        </a>
+                        <a href="shop.html" class="ad-card">
+                            <img src="assets/products/rear-stop.jpeg" alt="Стоп акциясы 2">
+                            <span>ЭлМОТО бестселлер</span>
+                        </a>
+                    </div>
+                </div>
+            </aside>
         </section>
 
-        <section id="product-list" class="market-grid" aria-live="polite"></section>
+        <section class="feature-row">
+            <button class="feature-tile" type="button" data-panel-open="cart">
+                <strong>Карзина</strong>
+                <span id="cart-count-tile">0 товар</span>
+            </button>
+            <button class="feature-tile" type="button" data-panel-open="favorites">
+                <strong>Избранное</strong>
+                <span id="favorites-count-tile">0 товар</span>
+            </button>
+            <button class="feature-tile" type="button" data-panel-open="orders">
+                <strong>Заказы</strong>
+                <span id="orders-count-tile">0 заказ</span>
+            </button>
+            <a class="feature-tile feature-link" href="shop.html">
+                <strong>ЭлМОТО Маркет</strong>
+                <span>Заказ берүү бетине өтүү</span>
+            </a>
+        </section>
+
+        <section class="recommended">
+            <div class="section-head">
+                <h2>Сунушталган товарлар</h2>
+                <a href="shop.html">Баарын көрүү</a>
+            </div>
+            <div class="rec-grid">
+                <article class="rec-card">
+                    <button class="fav-toggle" type="button" data-fav-id="101" data-name="тормозной колотка" data-price="400" data-image="assets/products/brake-shoe.jpeg" aria-label="Избранное">♡</button>
+                    <img src="assets/products/brake-shoe.jpeg" alt="тормозной колотка">
+                    <h3>тормозной колотка</h3>
+                    <p>400 сом</p>
+                    <a href="shop.html?search=тормозной">Заказ берүү</a>
+                </article>
+
+                <article class="rec-card">
+                    <button class="fav-toggle" type="button" data-fav-id="102" data-name="задный стоп" data-price="500" data-image="assets/products/rear-stop.jpeg" aria-label="Избранное">♡</button>
+                    <img src="assets/products/rear-stop.jpeg" alt="задный стоп">
+                    <h3>задный стоп</h3>
+                    <p>500 сом</p>
+                    <a href="shop.html?search=стоп">Заказ берүү</a>
+                </article>
+
+                <article class="rec-card">
+                    <button class="fav-toggle" type="button" data-fav-id="103" data-name="реле" data-price="180" data-image="assets/products/relay.jpeg" aria-label="Избранное">♡</button>
+                    <img src="assets/products/relay.jpeg" alt="реле">
+                    <h3>реле</h3>
+                    <p>180 сом</p>
+                    <a href="shop.html?search=реле">Заказ берүү</a>
+                </article>
+
+                <article class="rec-card">
+                    <button class="fav-toggle" type="button" data-fav-id="104" data-name="передный осс" data-price="1200" data-image="assets/products/front-hub.jpeg" aria-label="Избранное">♡</button>
+                    <img src="assets/products/front-hub.jpeg" alt="передный осс">
+                    <h3>передный осс</h3>
+                    <p>1200 сом</p>
+                    <a href="shop.html?search=осс">Заказ берүү</a>
+                </article>
+            </div>
+        </section>
     </main>
 
-    <aside id="cart-panel" class="cart-panel" aria-hidden="true">
-        <div class="cart-inner">
-            <div class="cart-header">
-                <div>
-                    <h2>Заказдар</h2>
-                    <p id="cart-summary">0 товар, 0 сом</p>
-                </div>
-                <button id="cart-close" class="icon-button" aria-label="Close cart">✕</button>
+    <section id="quick-panel" class="quick-panel" hidden>
+        <div class="panel-card">
+            <div class="panel-head">
+                <h3 id="panel-title">Маалымат</h3>
+                <button id="panel-close" type="button" aria-label="Жабуу">✕</button>
             </div>
-
-            <div id="cart-items" class="cart-content"></div>
-
-            <div class="cart-footer">
-                <div class="total-row">
-                    <span>Жалпы:</span>
-                    <strong id="total-amount">0 сом</strong>
-                </div>
-                <div class="form-group">
-                    <input id="customer-name" type="text" placeholder="Атыңыз" autocomplete="name">
-                    <input id="customer-phone" type="tel" placeholder="Телефон номери (0...)">
-                </div>
-                <button id="order-submit" class="checkout-btn">ЗАКАЗ БЕРҮҮ</button>
-            </div>
+            <div id="panel-body" class="panel-body"></div>
+            <a href="shop.html" class="panel-link">Маркетке өтүү</a>
         </div>
-    </aside>
+    </section>
 
-    <div id="toast" class="toast" aria-live="assertive" aria-atomic="true"></div>
+    <nav class="mobile-nav">
+        <a href="#top">Башкы бет</a>
+        <button type="button" data-panel-open="favorites">Избранное</button>
+        <button type="button" data-panel-open="cart">Карзина</button>
+        <button type="button" data-panel-open="orders">Заказы</button>
+        <a href="shop.html">Маркет</a>
+    </nav>
 
-    <script src="script.js"></script>
+    <script src="home.js"></script>
 </body>
 </html>
