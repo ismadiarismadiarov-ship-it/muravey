@@ -75,6 +75,16 @@
     gap: 18px;
 }
 
+.admin-page-body .mobile-tabs {
+    background: rgba(13, 15, 20, 0.96);
+    border-color: rgba(255, 255, 255, 0.16);
+}
+
+.admin-page-body .mobile-tabs a,
+.admin-page-body .mobile-tabs button {
+    color: rgba(255, 255, 255, 0.88);
+}
+
 .admin-card {
     background: linear-gradient(135deg, rgba(21, 23, 29, 0.92) 0%, rgba(10, 12, 17, 0.94) 100%);
     border: 1px solid rgba(255, 255, 255, 0.12);

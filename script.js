@@ -211,6 +211,8 @@ function initialize() {
     refs.customerPhone = $('#customer-phone');
     refs.toast = $('#toast');
     refs.themeToggle = $('#theme-toggle');
+    refs.mobileCartOpen = $('#mobile-cart-open');
+    refs.mobileFavoritesJump = $('#mobile-favorites-jump');
 
     state.cart = getLocalData(CART_KEY, {});
     const routeState = readRouteState();
@@ -243,6 +245,16 @@ function bindEvents() {
     refs.cartClose.addEventListener('click', () => toggleCart(false));
     refs.orderSubmit.addEventListener('click', handleCheckout);
     refs.themeToggle.addEventListener('click', toggleTheme);
+
+    if (refs.mobileCartOpen) {
+        refs.mobileCartOpen.addEventListener('click', () => toggleCart(true));
+    }
+
+    if (refs.mobileFavoritesJump) {
+        refs.mobileFavoritesJump.addEventListener('click', () => {
+            window.location.href = 'index.html#favorites-section';
+        });
+    }
 
     document.addEventListener('keydown', event => {
         if (event.key === 'Escape') {
