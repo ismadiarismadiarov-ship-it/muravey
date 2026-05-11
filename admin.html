@@ -19,56 +19,85 @@
                 <img src="assets/emoto-logo.jpeg" alt="ЭлМОТО эмблемасы" class="brand-emblem">
                 <div class="brand-text">
                     <span class="logo">ЭлМОТО</span>
-                    <span class="logo-accent">админ панели</span>
+                    <span class="logo-accent" data-i18n="admin_panel_label">админ панели</span>
                 </div>
             </div>
             <div></div>
             <div class="header-actions">
-                <a href="index.html" class="qr-top-link">Сайтка кайтуу</a>
-                <a href="qr.html" class="qr-top-link">QR</a>
+                <div class="lang-switch" role="group" aria-label="Тил">
+                    <button id="lang-ky" class="lang-btn is-active" type="button" data-lang="ky">KG</button>
+                    <button id="lang-ru" class="lang-btn" type="button" data-lang="ru">RU</button>
+                </div>
+                <a href="index.html" class="qr-top-link" data-i18n="back_to_site">Сайтка кайтуу</a>
             </div>
         </div>
     </header>
 
     <main class="container admin-page">
         <section id="login-card" class="admin-card auth-card">
-            <h1>Админ кирүү</h1>
-            <p>Админ пароль киргизиңиз.</p>
+            <h1 data-i18n="login_title">Админ кирүү</h1>
+            <p data-i18n="login_text">Админ пароль киргизиңиз.</p>
             <div class="auth-form">
-                <input id="admin-password" type="password" placeholder="Пароль">
-                <button id="admin-login-btn" class="checkout-btn">КИРҮҮ</button>
+                <input id="admin-password" type="password" placeholder="Пароль" data-i18n-placeholder="password_placeholder">
+                <button id="admin-login-btn" class="checkout-btn" data-i18n="login_btn">КИРҮҮ</button>
             </div>
         </section>
 
         <section id="admin-panel" class="admin-card admin-hidden">
             <div class="admin-panel-head">
                 <div>
-                    <h2>Товар башкаруу</h2>
-                    <p>Товарлар жана сүрөттөр GitHub серверинде сакталат.</p>
+                    <h2 data-i18n="products_manage">Товар башкаруу</h2>
+                    <p data-i18n="products_manage_text">Товарлар жана сүрөттөр GitHub серверинде сакталат.</p>
                 </div>
-                <button id="admin-logout" class="secondary-btn">Чыгуу</button>
+                <button id="admin-logout" class="secondary-btn" data-i18n="logout_btn">Чыгуу</button>
+            </div>
+
+            <div class="admin-kpi-grid">
+                <div class="admin-kpi">
+                    <strong id="kpi-products">0</strong>
+                    <span data-i18n="kpi_products">Товар</span>
+                </div>
+                <div class="admin-kpi">
+                    <strong id="kpi-value">0 сом</strong>
+                    <span data-i18n="kpi_value">Жалпы сумма</span>
+                </div>
+                <div class="admin-kpi">
+                    <strong id="kpi-updated">--:--</strong>
+                    <span data-i18n="kpi_updated">Акыркы синхрон</span>
+                </div>
             </div>
 
             <div class="server-box">
-                <h3>Сервер туташуу (GitHub API)</h3>
-                <p class="muted">Repo укугу бар Personal Access Token киргизиңиз. Бул токен админ браузеринде гана сакталат.</p>
+                <h3 data-i18n="server_connect_title">Сервер туташуу (GitHub API)</h3>
+                <p class="muted" data-i18n="server_connect_text">Repo укугу бар Personal Access Token киргизиңиз. Бул токен админ браузеринде гана сакталат.</p>
                 <div class="server-grid">
-                    <input id="github-token" type="password" placeholder="GitHub token (ghp_...)">
-                    <button id="save-token" class="checkout-btn">Туташуу</button>
-                    <button id="sync-now" class="secondary-btn">Азыр жаңыртуу</button>
+                    <input id="github-token" type="password" placeholder="GitHub token (ghp_...)" data-i18n-placeholder="token_placeholder">
+                    <button id="save-token" class="checkout-btn" data-i18n="connect_btn">Туташуу</button>
+                    <button id="sync-now" class="secondary-btn" data-i18n="refresh_btn">Азыр жаңыртуу</button>
                 </div>
                 <p id="sync-status" class="sync-status">Синхрон күтүүдө...</p>
             </div>
 
+            <div class="admin-tools">
+                <input id="admin-search" type="search" placeholder="Товар издөө..." data-i18n-placeholder="search_placeholder">
+                <select id="admin-sort" aria-label="Сорттоо">
+                    <option value="new" data-i18n="sort_new">Жаңы биринчи</option>
+                    <option value="old" data-i18n="sort_old">Эски биринчи</option>
+                    <option value="price_desc" data-i18n="sort_price_desc">Баасы кымбат биринчи</option>
+                    <option value="price_asc" data-i18n="sort_price_asc">Баасы арзан биринчи</option>
+                    <option value="name_asc" data-i18n="sort_name">Аты боюнча</option>
+                </select>
+            </div>
+
             <div class="admin-form-grid">
-                <input id="product-name" type="text" placeholder="Товардын аталышы">
-                <input id="product-price" type="number" placeholder="Баасы (сом)">
+                <input id="product-name" type="text" placeholder="Товардын аталышы" data-i18n-placeholder="product_name_placeholder">
+                <input id="product-price" type="number" placeholder="Баасы (сом)" data-i18n-placeholder="product_price_placeholder">
                 <label class="upload-label" for="product-image">
                     <span id="upload-status">📸 Сүрөт тандаңыз</span>
                 </label>
                 <input id="product-image" type="file" accept="image/*" hidden>
                 <div id="image-preview" class="image-preview hidden"></div>
-                <button id="add-product" class="checkout-btn">Товар кошуу</button>
+                <button id="add-product" class="checkout-btn" data-i18n="add_product_btn">Товар кошуу</button>
             </div>
 
             <div id="admin-list" class="admin-list-grid"></div>

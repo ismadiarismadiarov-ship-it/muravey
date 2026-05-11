@@ -22,8 +22,35 @@
 
 .admin-page-body .header-actions {
     display: flex;
+    align-items: center;
+    gap: 10px;
     justify-self: end;
     width: auto;
+}
+
+.lang-switch {
+    display: inline-flex;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.lang-btn {
+    border: 0;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.78);
+    padding: 9px 12px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.lang-btn.is-active {
+    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+    color: #101318;
 }
 
 .admin-page-body .brand-text .logo-accent,
@@ -121,6 +148,63 @@
 
 .admin-panel-head p {
     color: rgba(255, 255, 255, 0.76);
+}
+
+.admin-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.admin-kpi {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 12px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.admin-kpi strong {
+    display: block;
+    font-size: 1.3rem;
+    margin-bottom: 4px;
+    color: #ffd54f;
+}
+
+.admin-kpi span {
+    color: rgba(255, 255, 255, 0.78);
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.admin-tools {
+    margin-bottom: 14px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 230px;
+    gap: 10px;
+}
+
+.admin-tools input,
+.admin-tools select {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 11px 13px;
+    outline: none;
+    transition: var(--transition);
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.34);
+}
+
+.admin-tools select {
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.admin-tools input:focus,
+.admin-tools select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.15);
 }
 
 .server-box {
@@ -345,6 +429,14 @@
         grid-template-columns: 1fr;
     }
 
+    .admin-tools {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-kpi-grid {
+        grid-template-columns: 1fr;
+    }
+
     .admin-item-card {
         grid-template-columns: 1fr;
     }
@@ -399,8 +491,12 @@
         gap: 8px;
     }
 
+    .admin-page-body .lang-switch {
+        flex: 0 0 auto;
+    }
+
     .admin-page-body .header-actions .qr-top-link {
-        flex: 1 1 calc(50% - 8px);
+        flex: 1 1 calc(70% - 8px);
         text-align: center;
     }
 }

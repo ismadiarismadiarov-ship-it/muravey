@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЭлМОТО | Запчасты</title>
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/jpeg" href="assets/emoto-logo.jpeg">
+    <link rel="apple-touch-icon" href="assets/emoto-logo.jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="section-pages.css">
+</head>
+<body>
+    <header class="shell page-header">
+        <div class="head-top">
+            <a href="index.html" class="brand">
+                <img src="assets/emoto-logo.jpeg" alt="ЭлМОТО">
+                <div>
+                    <h1><span class="gold">Эл</span><span class="green">МОТО</span></h1>
+                    <p>запчасты бөлүмү</p>
+                </div>
+            </a>
+            <div class="head-links">
+                <a href="shop.html?panel=orders" class="primary">Заказдар</a>
+            </div>
+        </div>
+        <form id="page-search-form" class="search-box">
+            <input id="page-search-input" type="search" placeholder="Запчасттарды издөө...">
+            <button type="submit">Издөө</button>
+        </form>
+    </header>
+
+    <main class="shell page-main">
+        <h2>Запчасты</h2>
+        <p>Бул жерде запчасть товарлары гана турат. Кийин админ аркылуу жаңырта аласыз.</p>
+
+        <section class="product-grid">
+            <article class="product-card" data-name="тормозной колотка">
+                <img src="assets/products/brake-shoe.jpeg" alt="Тормозной колотка">
+                <div class="copy">
+                    <h3>Тормозной колотка</h3>
+                    <p>400 сом</p>
+                </div>
+            </article>
+
+            <article class="product-card" data-name="задный стоп">
+                <img src="assets/products/rear-stop.jpeg" alt="Задный стоп">
+                <div class="copy">
+                    <h3>Задный стоп</h3>
+                    <p>500 сом</p>
+                </div>
+            </article>
+
+            <article class="product-card" data-name="реле">
+                <img src="assets/products/relay.jpeg" alt="Реле">
+                <div class="copy">
+                    <h3>Реле</h3>
+                    <p>180 сом</p>
+                </div>
+            </article>
+
+            <article class="product-card" data-name="передный осс">
+                <img src="assets/products/front-hub.jpeg" alt="Передный осс">
+                <div class="copy">
+                    <h3>Передный осс</h3>
+                    <p>1200 сом</p>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script src="section-pages.js"></script>
+</body>
+</html>

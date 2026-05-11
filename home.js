@@ -1,5 +1,6 @@
 const CART_KEY = 'muravey_pro_cart';
 const FAVORITES_KEY = 'el_moto_home_favorites';
+const LIKES_KEY = 'el_moto_product_likes';
 
 const refs = {};
 let sliderTimer = null;
@@ -29,6 +30,28 @@ function setFavorites(items) {
     localStorage.setItem(FAVORITES_KEY, JSON.stringify(items));
 }
 
+function getLikesMap() {
+    const raw = localStorage.getItem(LIKES_KEY);
+    const parsed = safeParse(raw, {});
+    return parsed && typeof parsed === 'object' ? parsed : {};
+}
+
+function setLikesMap(map) {
+    localStorage.setItem(LIKES_KEY, JSON.stringify(map));
+}
+
+function getLikeCount(id) {
+    const map = getLikesMap();
+    return Number(map[String(id)] || 0);
+}
+
+function increaseLikeCount(id) {
+    const key = String(id);
+    const map = getLikesMap();
+    map[key] = Number(map[key] || 0) + 1;
+    setLikesMap(map);
+}
+
 function formatMoney(value) {
     return `${Number(value || 0).toLocaleString()} сом`;
 }
@@ -50,11 +73,20 @@ function refreshCounters() {
     refs.favoritesCountTile.textContent = `${favoritesCount} товар`;
 }
 
+function updateSlideInfo() {
+    const slide = refs.slides[currentSlide];
+    if (!slide) return;
+
+    refs.slideInfoTitle.textContent = slide.dataset.infoTitle || 'Товар жөнүндө маалымат';
+    refs.slideInfoText.textContent = slide.dataset.infoText || 'Бул баннер үчүн маалымат кошула элек.';
+}
+
 function setSlide(index) {
     if (!refs.slides.length) return;
     currentSlide = (index + refs.slides.length) % refs.slides.length;
     refs.slides.forEach((slide, idx) => slide.classList.toggle('is-active', idx === currentSlide));
     refs.dots.forEach((dot, idx) => dot.classList.toggle('is-active', idx === currentSlide));
+    updateSlideInfo();
 }
 
 function startSlider() {
@@ -62,7 +94,7 @@ function startSlider() {
     sliderTimer = setInterval(() => setSlide(currentSlide + 1), 5000);
 }
 
-function navigateToShop(target) {
+function navigateToTarget(target) {
     if (target === 'orders' || target === 'cart') {
         window.location.href = `shop.html?panel=${encodeURIComponent(target)}`;
         return;
@@ -74,7 +106,15 @@ function navigateToShop(target) {
 }
 
 function renderFavoritesBoard() {
-    const favorites = getFavorites();
+    const favorites = getFavorites()
+        .map(item => ({
+            ...item,
+            likeCount: getLikeCount(item.id)
+        }))
+        .sort((a, b) => {
+            if (b.likeCount !== a.likeCount) return b.likeCount - a.likeCount;
+            return String(a.name).localeCompare(String(b.name));
+        });
 
     if (!favorites.length) {
         refs.favoritesGrid.innerHTML = `
@@ -90,6 +130,7 @@ function renderFavoritesBoard() {
         <article class="favorite-card">
             <img src="${item.image || 'assets/products/placeholder.svg'}" alt="${item.name}">
             <div class="favorite-copy">
+                <span class="favorite-rank">🔥 Лайк: ${Number(item.likeCount || 0)}</span>
                 <h3>${item.name}</h3>
                 <p>${formatMoney(item.price)}</p>
             </div>
@@ -105,7 +146,10 @@ function isFavorite(id) {
 function syncFavoriteButtons() {
     refs.favoriteButtons.forEach(button => {
         const active = isFavorite(button.dataset.favId);
+        const likeCount = getLikeCount(button.dataset.favId);
         button.classList.toggle('is-active', active);
+        button.dataset.likeCount = String(likeCount);
+        button.setAttribute('aria-label', `Избранное, лайк ${likeCount}`);
         button.textContent = active ? '♥' : '♡';
     });
 }
@@ -122,13 +166,41 @@ function toggleFavorite(button) {
         ? favorites.filter(item => String(item.id) !== String(id))
         : [...favorites, { id, name, price, image }];
 
+    if (!exists) {
+        increaseLikeCount(id);
+    }
+
     setFavorites(next);
     syncFavoriteButtons();
     refreshCounters();
     renderFavoritesBoard();
 }
 
+function resolveSearchTarget(scope, query) {
+    const map = {
+        tricycles: 'tricycles.html',
+        scooters: 'scooters.html',
+        parts: 'zapchasty.html',
+        service: 'server.html'
+    };
+
+    const page = map[scope] || 'shop.html';
+    if (!query) return page;
+    return `${page}?search=${encodeURIComponent(query)}`;
+}
+
 function bindEvents() {
+    if (refs.backButton) {
+        refs.backButton.addEventListener('click', () => {
+            if (window.history.length > 1) {
+                window.history.back();
+                return;
+            }
+
+            window.location.href = 'shop.html?panel=orders';
+        });
+    }
+
     refs.nextSlide.addEventListener('click', () => {
         setSlide(currentSlide + 1);
         startSlider();
@@ -146,17 +218,25 @@ function bindEvents() {
         });
     });
 
+    refs.infoButton.addEventListener('click', () => {
+        const hidden = refs.infoBox.hasAttribute('hidden');
+        if (hidden) {
+            refs.infoBox.removeAttribute('hidden');
+        } else {
+            refs.infoBox.setAttribute('hidden', '');
+        }
+    });
+
     refs.searchForm.addEventListener('submit', event => {
         event.preventDefault();
         const query = refs.searchInput.value.trim();
         const scope = refs.searchScope.value;
-        const preparedQuery = scope === 'all' ? query : `${scope} ${query}`.trim();
-        const target = query ? `shop.html?search=${encodeURIComponent(preparedQuery)}` : 'shop.html';
+        const target = resolveSearchTarget(scope, query);
         window.location.href = target;
     });
 
     document.querySelectorAll('[data-nav-target]').forEach(control => {
-        control.addEventListener('click', () => navigateToShop(control.dataset.navTarget));
+        control.addEventListener('click', () => navigateToTarget(control.dataset.navTarget));
     });
 
     refs.favoriteButtons.forEach(button => {
@@ -171,6 +251,7 @@ function bindEvents() {
 }
 
 function initRefs() {
+    refs.backButton = document.getElementById('go-back-btn');
     refs.searchForm = document.getElementById('home-search-form');
     refs.searchScope = document.getElementById('home-search-scope');
     refs.searchInput = document.getElementById('home-search-input');
@@ -186,6 +267,11 @@ function initRefs() {
     refs.prevSlide = document.getElementById('slide-prev');
     refs.slides = Array.from(document.querySelectorAll('.slide'));
     refs.dots = Array.from(document.querySelectorAll('#slide-dots button'));
+
+    refs.infoButton = document.getElementById('slide-info-btn');
+    refs.infoBox = document.getElementById('slide-info-box');
+    refs.slideInfoTitle = document.getElementById('slide-info-title');
+    refs.slideInfoText = document.getElementById('slide-info-text');
 
     refs.favoriteButtons = Array.from(document.querySelectorAll('.fav-toggle'));
     refs.favoritesGrid = document.getElementById('favorites-grid');

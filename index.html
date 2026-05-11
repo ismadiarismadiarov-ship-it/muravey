@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ЭлМОТО | Башкы бет</title>
-    <meta name="description" content="ЭлМОТО башкы бет: акциялар, реклама, карзина, избранное жана заказ бөлүмдөрү.">
-    <meta name="keywords" content="ЭлМОТО, мото, маркет, акция, заказ, карзина, избранное">
+    <meta name="description" content="ЭлМОТО башкы бет: каталог, заказ, карзина, избранное жана баннер маалыматтары.">
+    <meta name="keywords" content="ЭлМОТО, мото, каталог, трициклы, скутеры, запчасты, заказ">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta name="theme-color" content="#0f69ff">
+    <meta name="theme-color" content="#0f1e3a">
     <meta property="og:title" content="ЭлМОТО | Башкы бет">
-    <meta property="og:description" content="ЭлМОТО маркетинин башкы бети. Заказ, карзина, избранное жана акциялар.">
+    <meta property="og:description" content="ЭлМОТО каталог жана заказ системасы.">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ky_KG">
     <meta name="twitter:card" content="summary_large_image">
@@ -24,18 +24,25 @@
 <body id="top">
     <header class="home-header">
         <div class="shell top-row">
-            <a href="shop.html?panel=orders" class="brand-block" aria-label="ЭлМОТО басканда заказдарга өтүү">
-                <img src="assets/emoto-logo.jpeg" alt="ЭлМОТО эмблемасы">
-                <div>
-                    <p class="brand-title">ЭлМОТО</p>
-                    <p class="brand-sub">мото маркет</p>
-                </div>
-            </a>
+            <div class="brand-wrap">
+                <button id="go-back-btn" class="back-nav-btn" type="button" aria-label="Артка кайтуу">←</button>
+                <a href="shop.html?panel=orders" class="brand-block" aria-label="ЭлМОТО басканда заказдарга өтүү">
+                    <img src="assets/emoto-logo.jpeg" alt="ЭлМОТО эмблемасы">
+                    <div class="brand-text">
+                        <p class="brand-title">
+                            <span class="brand-el"><span class="brand-lead">Э</span>л</span><span class="brand-moto"><span class="brand-lead">М</span>ОТО</span>
+                        </p>
+                        <p class="brand-sub">мото маркет</p>
+                    </div>
+                </a>
+            </div>
 
-            <form id="home-search-form" class="home-search">
-                <select id="home-search-scope" aria-label="Издөө категориясы">
+            <form id="home-search-form" class="home-search" autocomplete="off">
+                <select id="home-search-scope" aria-label="Издөө бөлүмү">
                     <option value="all">Бардыгы</option>
-                    <option value="parts">Мото тетиктер</option>
+                    <option value="tricycles">Трициклы</option>
+                    <option value="scooters">Скутеры</option>
+                    <option value="parts">Запчасты</option>
                     <option value="service">Сервис</option>
                 </select>
                 <input id="home-search-input" type="search" placeholder="ЭлМОТО маркеттен издөө...">
@@ -48,50 +55,49 @@
                 <button class="tool-btn" data-nav-target="cart" type="button">Карзина <span id="cart-count">0</span></button>
             </div>
         </div>
-
-        <div class="shell category-row">
-            <button type="button" class="cat-pill active">Сделано в Кыргызстане</button>
-            <button type="button" class="cat-pill">Электр тетиктер</button>
-            <button type="button" class="cat-pill">Тормоз системасы</button>
-            <button type="button" class="cat-pill">Жарык жана стоптор</button>
-            <button type="button" class="cat-pill">Руль жана аксессуар</button>
-            <a href="qr.html" class="cat-pill link-pill">QR</a>
-            <a href="admin.html" class="cat-pill link-pill">Админ</a>
-        </div>
     </header>
 
     <main class="shell home-main">
         <section class="hero-layout">
-            <div class="hero-slider" aria-label="ЭлМОТО акциялары">
+            <aside class="catalog-column" aria-label="Каталог бөлүмдөрү">
+                <h2>Каталог</h2>
+                <a class="catalog-item" href="tricycles.html">
+                    <strong><span class="catalog-icon">🛺</span> Трициклы</strong>
+                    <span>Трицикл товарлары</span>
+                </a>
+
+                <a class="catalog-item" href="scooters.html">
+                    <strong><span class="catalog-icon">🛵</span> Скутеры</strong>
+                    <span>Скутер моделдери</span>
+                </a>
+
+                <a class="catalog-item" href="zapchasty.html">
+                    <strong><span class="catalog-icon">🔩</span> Запчасты</strong>
+                    <span>Тетиктер каталогу</span>
+                </a>
+
+                <a class="catalog-item" href="server.html">
+                    <strong><span class="catalog-icon">🔧</span> Сервис</strong>
+                    <span>Байланыш жана дарек</span>
+                </a>
+            </aside>
+
+            <div class="hero-slider" aria-label="ЭлМОТО баннери">
                 <div id="hero-slides" class="hero-slides">
-                    <article class="slide is-active">
-                        <div class="slide-copy">
-                            <p class="eyebrow">ЭлМОТО СЕЗОН 2026</p>
-                            <h1>Мото тетиктерге чоң арзандатуу</h1>
-                            <p>Запастарды жаңыртыңыз: сапаттуу тетиктер жана тез заказ.</p>
-                            <a href="shop.html?panel=orders" class="primary-link">Заказдарга өтүү</a>
-                        </div>
-                        <img src="assets/products/rear-stop.jpeg" alt="Акция баннери">
+                    <article class="slide is-active" data-info-title="Передний осс" data-info-text="Бул позиция жүккө чыдамдуу. Сапаттуу металл жана узак мөөнөт.">
+                        <img src="assets/products/front-hub.jpeg" alt="Передний осс">
                     </article>
 
-                    <article class="slide">
-                        <div class="slide-copy">
-                            <p class="eyebrow">ТЕЗ ЖЕТКИРҮҮ</p>
-                            <h1>Заказ бериңиз, дароо байланышабыз</h1>
-                            <p>Карзина жана заказ бөлүмү толук иштейт.</p>
-                            <a href="shop.html?panel=orders" class="primary-link">Заказдарга өтүү</a>
-                        </div>
-                        <img src="assets/products/front-hub.jpeg" alt="Заказ баннери">
+                    <article class="slide" data-info-title="Задный стоп" data-info-text="LED стоп жарыгы түнкүсүн даана көрүнөт. Тез орнотулат.">
+                        <img src="assets/products/rear-stop.jpeg" alt="Задный стоп">
                     </article>
 
-                    <article class="slide">
-                        <div class="slide-copy">
-                            <p class="eyebrow">ЖАҢЫ ПОЗИЦИЯЛАР</p>
-                            <h1>Эң керектүү мото тетиктер бир жерде</h1>
-                            <p>Издөөнү колдонуңуз жана керектүү товарды тез табыңыз.</p>
-                            <a href="shop.html?search=мото" class="primary-link">Мото тетиктерди табуу</a>
-                        </div>
-                        <img src="assets/products/relay.jpeg" alt="Жаңы товар баннери">
+                    <article class="slide" data-info-title="Реле" data-info-text="Электро тутум үчүн туруктуу иштеген ишенимдүү реле.">
+                        <img src="assets/products/relay.jpeg" alt="Реле">
+                    </article>
+
+                    <article class="slide" data-info-title="Тормоз колодкасы" data-info-text="Жогорку сапаттагы тормоз колодка, тормоздоону жумшак жана коопсуз кылат.">
+                        <img src="assets/products/brake-shoe.jpeg" alt="Тормоз колодкасы">
                     </article>
                 </div>
 
@@ -101,42 +107,19 @@
                         <button type="button" class="is-active" data-slide="0"></button>
                         <button type="button" data-slide="1"></button>
                         <button type="button" data-slide="2"></button>
+                        <button type="button" data-slide="3"></button>
                     </div>
                     <button id="slide-next" type="button" aria-label="Кийинки баннер">→</button>
                 </div>
-            </div>
 
-            <aside class="ad-column" aria-label="Реклама">
-                <h2>Күндүн сунуштары</h2>
-                <div class="ad-window">
-                    <div class="ad-track">
-                        <a href="shop.html" class="ad-card">
-                            <img src="assets/products/brake-shoe.jpeg" alt="Тормоз акциясы">
-                            <span>Тормоз тетиктер -25%</span>
-                        </a>
-                        <a href="shop.html" class="ad-card">
-                            <img src="assets/products/rear-stop.jpeg" alt="Стоп акциясы">
-                            <span>LED стоп акция</span>
-                        </a>
-                        <a href="shop.html" class="ad-card">
-                            <img src="assets/products/relay.jpeg" alt="Реле акциясы">
-                            <span>Реле жана электро блок</span>
-                        </a>
-                        <a href="shop.html" class="ad-card">
-                            <img src="assets/products/front-hub.jpeg" alt="Осс акциясы">
-                            <span>Передний осс жеңил баада</span>
-                        </a>
-                        <a href="shop.html" class="ad-card">
-                            <img src="assets/products/brake-shoe.jpeg" alt="Тормоз акциясы 2">
-                            <span>Күндүн сунушу</span>
-                        </a>
-                        <a href="shop.html" class="ad-card">
-                            <img src="assets/products/rear-stop.jpeg" alt="Стоп акциясы 2">
-                            <span>ЭлМОТО бестселлер</span>
-                        </a>
+                <div class="hero-info">
+                    <button id="slide-info-btn" type="button">Маалымат</button>
+                    <div id="slide-info-box" class="slide-info-box" hidden>
+                        <strong id="slide-info-title"></strong>
+                        <p id="slide-info-text"></p>
                     </div>
                 </div>
-            </aside>
+            </div>
         </section>
 
         <section class="feature-row">
@@ -209,8 +192,8 @@
 
     <nav class="mobile-nav">
         <a href="#top">Башкы бет</a>
+        <a href="tricycles.html">Трициклы</a>
         <button type="button" data-nav-target="favorites">Избранное</button>
-        <button type="button" data-nav-target="cart">Карзина</button>
         <button type="button" data-nav-target="orders">Заказы</button>
         <a href="shop.html?panel=orders">Дүкөн</a>
     </nav>

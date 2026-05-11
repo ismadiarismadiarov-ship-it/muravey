@@ -1,6 +1,7 @@
 const ADMIN_PASS = '2026';
 const ADMIN_SESSION_KEY = 'el_moto_admin_session';
 const GITHUB_TOKEN_KEY = 'el_moto_github_pat';
+const ADMIN_LANG_KEY = 'el_moto_admin_lang';
 
 const REPO_OWNER = 'ismadiarismadiarov-ship-it';
 const REPO_NAME = 'muravey';
@@ -11,6 +12,143 @@ const UPLOADS_DIR = 'assets/uploads';
 const RAW_BASE = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}`;
 const API_BASE = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`;
 const IMAGE_FALLBACK = 'assets/products/placeholder.svg';
+
+const I18N = {
+    ky: {
+        admin_panel_label: 'админ панели',
+        back_to_site: 'Сайтка кайтуу',
+        login_title: 'Админ кирүү',
+        login_text: 'Админ пароль киргизиңиз.',
+        password_placeholder: 'Пароль',
+        login_btn: 'КИРҮҮ',
+        products_manage: 'Товар башкаруу',
+        products_manage_text: 'Товарлар жана сүрөттөр GitHub серверинде сакталат.',
+        logout_btn: 'Чыгуу',
+        kpi_products: 'Товар',
+        kpi_value: 'Жалпы сумма',
+        kpi_updated: 'Акыркы синхрон',
+        server_connect_title: 'Сервер туташуу (GitHub API)',
+        server_connect_text: 'Repo укугу бар Personal Access Token киргизиңиз. Бул токен админ браузеринде гана сакталат.',
+        token_placeholder: 'GitHub token (ghp_...)',
+        connect_btn: 'Туташуу',
+        refresh_btn: 'Азыр жаңыртуу',
+        search_placeholder: 'Товар издөө...',
+        sort_new: 'Жаңы биринчи',
+        sort_old: 'Эски биринчи',
+        sort_price_desc: 'Баасы кымбат биринчи',
+        sort_price_asc: 'Баасы арзан биринчи',
+        sort_name: 'Аты боюнча',
+        product_name_placeholder: 'Товардын аталышы',
+        product_price_placeholder: 'Баасы (сом)',
+        add_product_btn: 'Товар кошуу',
+        upload_pick: '📸 Сүрөт тандаңыз',
+        upload_selected: '✅ {file}',
+        save_btn: 'Сактоо',
+        change_image_btn: 'Сүрөт алмаштыруу',
+        delete_btn: 'Өчүрүү',
+        empty_title: 'Товар жок',
+        empty_text: 'Жаңы товар кошуңуз.',
+        wrong_password: 'Пароль туура эмес',
+        token_required: 'GitHub token жазыңыз',
+        token_first: 'Алгач GitHub token туташтырыңыз',
+        fill_required: 'Аталыш, баа жана сүрөт толтуруңуз',
+        invalid_fields: 'Аталыш же баа туура эмес',
+        confirm_delete: 'Товарды чындап өчүрөсүзбү?',
+        toast_connected: 'GitHub туташты',
+        toast_connect_error: 'GitHub туташуу катасы',
+        toast_products_refreshed: 'Товарлар серверден жаңырды',
+        toast_saved: 'Товар серверге сакталды',
+        toast_save_error: 'Сактоодо ката чыкты',
+        toast_updated: 'Товар жаңыртылды',
+        toast_update_error: 'Жаңыртууда ката',
+        toast_deleted: 'Товар өчүрүлдү',
+        toast_delete_error: 'Өчүрүүдө ката',
+        toast_image_updated: 'Сүрөт жаңырды жана серверге сакталды',
+        toast_image_error: 'Сүрөт жаңыртууда ката',
+        sync_waiting: 'Синхрон күтүүдө...',
+        sync_need_token: 'GitHub token киргизиңиз',
+        sync_loading: 'Серверден товарлар жүктөлүүдө...',
+        sync_ok: 'Синхрон OK: {time}',
+        sync_read_error: 'Синхрон катасы: products.json окулбай калды',
+        sync_connect_ok: 'GitHub API туташты. Эми өзгөртүүлөр серверге сакталат.',
+        sync_token_error: 'Token же repo уруксат туура эмес',
+        sync_save_error: 'Товар сактоодо ката чыкты',
+        sync_update_error: 'Товар жаңыртууда ката чыкты',
+        sync_delete_error: 'Өчүрүүдө ката чыкты',
+        sync_image_error: 'Сүрөт жаңыртууда ката чыкты',
+        sync_token_found: 'GitHub token табылды, синхрон даяр',
+        sync_login_waiting: 'Админ кирүүнү күтүүдө...',
+        need_token_error: 'Алгач GitHub token киргизиңиз',
+        fallback_name: 'Товар'
+    },
+    ru: {
+        admin_panel_label: 'панель администратора',
+        back_to_site: 'Вернуться на сайт',
+        login_title: 'Вход администратора',
+        login_text: 'Введите пароль администратора.',
+        password_placeholder: 'Пароль',
+        login_btn: 'ВОЙТИ',
+        products_manage: 'Управление товарами',
+        products_manage_text: 'Товары и изображения хранятся на сервере GitHub.',
+        logout_btn: 'Выйти',
+        kpi_products: 'Товары',
+        kpi_value: 'Общая сумма',
+        kpi_updated: 'Последняя синхронизация',
+        server_connect_title: 'Подключение к серверу (GitHub API)',
+        server_connect_text: 'Введите Personal Access Token с правами на репозиторий. Токен хранится только в браузере администратора.',
+        token_placeholder: 'GitHub token (ghp_...)',
+        connect_btn: 'Подключить',
+        refresh_btn: 'Обновить сейчас',
+        search_placeholder: 'Поиск товара...',
+        sort_new: 'Сначала новые',
+        sort_old: 'Сначала старые',
+        sort_price_desc: 'Сначала дороже',
+        sort_price_asc: 'Сначала дешевле',
+        sort_name: 'По названию',
+        product_name_placeholder: 'Название товара',
+        product_price_placeholder: 'Цена (сом)',
+        add_product_btn: 'Добавить товар',
+        upload_pick: '📸 Выберите изображение',
+        upload_selected: '✅ {file}',
+        save_btn: 'Сохранить',
+        change_image_btn: 'Заменить фото',
+        delete_btn: 'Удалить',
+        empty_title: 'Товаров нет',
+        empty_text: 'Добавьте новый товар.',
+        wrong_password: 'Неверный пароль',
+        token_required: 'Введите GitHub token',
+        token_first: 'Сначала подключите GitHub token',
+        fill_required: 'Заполните название, цену и изображение',
+        invalid_fields: 'Некорректное название или цена',
+        confirm_delete: 'Точно удалить товар?',
+        toast_connected: 'GitHub подключен',
+        toast_connect_error: 'Ошибка подключения к GitHub',
+        toast_products_refreshed: 'Товары обновлены с сервера',
+        toast_saved: 'Товар сохранен на сервер',
+        toast_save_error: 'Ошибка при сохранении',
+        toast_updated: 'Товар обновлен',
+        toast_update_error: 'Ошибка обновления',
+        toast_deleted: 'Товар удален',
+        toast_delete_error: 'Ошибка удаления',
+        toast_image_updated: 'Изображение обновлено и сохранено',
+        toast_image_error: 'Ошибка обновления изображения',
+        sync_waiting: 'Ожидание синхронизации...',
+        sync_need_token: 'Введите GitHub token',
+        sync_loading: 'Загрузка товаров с сервера...',
+        sync_ok: 'Синхронизация OK: {time}',
+        sync_read_error: 'Ошибка синхронизации: не удалось прочитать products.json',
+        sync_connect_ok: 'GitHub API подключен. Изменения будут сохраняться на сервер.',
+        sync_token_error: 'Неверный token или нет доступа к репозиторию',
+        sync_save_error: 'Ошибка сохранения товара',
+        sync_update_error: 'Ошибка обновления товара',
+        sync_delete_error: 'Ошибка удаления товара',
+        sync_image_error: 'Ошибка обновления изображения',
+        sync_token_found: 'GitHub token найден, синхронизация готова',
+        sync_login_waiting: 'Ожидание входа администратора...',
+        need_token_error: 'Сначала введите GitHub token',
+        fallback_name: 'Товар'
+    }
+};
 
 const FALLBACK_PRODUCTS = [
     {
@@ -51,13 +189,59 @@ const state = {
     products: [],
     selectedImageFile: null,
     token: '',
-    busy: false
+    busy: false,
+    lang: localStorage.getItem(ADMIN_LANG_KEY) || 'ky',
+    syncMessage: { key: 'sync_waiting', status: '', params: {} },
+    filterQuery: '',
+    sortMode: 'new'
 };
 
 const refs = {};
 
 function $(selector) {
     return document.querySelector(selector);
+}
+
+function t(key, params = {}) {
+    const dict = I18N[state.lang] || I18N.ky;
+    const fallback = I18N.ky;
+    let text = dict[key] || fallback[key] || key;
+    Object.entries(params).forEach(([name, value]) => {
+        text = text.replace(new RegExp(`\\{${name}\\}`, 'g'), String(value));
+    });
+    return text;
+}
+
+function applyTranslations() {
+    document.querySelectorAll('[data-i18n]').forEach(node => {
+        const key = node.getAttribute('data-i18n');
+        node.textContent = t(key);
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(node => {
+        const key = node.getAttribute('data-i18n-placeholder');
+        node.setAttribute('placeholder', t(key));
+    });
+
+    refs.uploadStatus.textContent = state.selectedImageFile
+        ? t('upload_selected', { file: state.selectedImageFile.name })
+        : t('upload_pick');
+
+    setSyncStatusByKey(state.syncMessage.key, state.syncMessage.status, state.syncMessage.params);
+    renderAdminList();
+    updateKpis();
+}
+
+function setLanguage(lang) {
+    state.lang = I18N[lang] ? lang : 'ky';
+    localStorage.setItem(ADMIN_LANG_KEY, state.lang);
+    document.documentElement.lang = state.lang === 'ru' ? 'ru' : 'ky';
+
+    refs.langButtons.forEach(button => {
+        button.classList.toggle('is-active', button.dataset.lang === state.lang);
+    });
+
+    applyTranslations();
 }
 
 function showToast(message) {
@@ -67,15 +251,16 @@ function showToast(message) {
     refs.toast.hideTimer = setTimeout(() => refs.toast.classList.remove('show'), 2800);
 }
 
-function setSyncStatus(text, status = '') {
-    refs.syncStatus.textContent = text;
+function setSyncStatusByKey(key, status = '', params = {}) {
+    state.syncMessage = { key, status, params };
+    refs.syncStatus.textContent = t(key, params);
     refs.syncStatus.classList.remove('ok', 'warn', 'err');
     if (status) refs.syncStatus.classList.add(status);
 }
 
 function setBusy(isBusy) {
     state.busy = isBusy;
-    document.querySelectorAll('button, input').forEach(el => {
+    document.querySelectorAll('button, input, select').forEach(el => {
         if (el.id === 'admin-password' && sessionStorage.getItem(ADMIN_SESSION_KEY) !== '1') return;
         el.disabled = isBusy;
     });
@@ -90,10 +275,23 @@ function escapeHtml(value) {
         .replace(/'/g, '&#39;');
 }
 
+function formatMoney(value) {
+    const locale = state.lang === 'ru' ? 'ru-RU' : 'ky-KG';
+    return `${Number(value || 0).toLocaleString(locale)} сом`;
+}
+
+function formatTime(value) {
+    if (!value) return '--:--';
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return '--:--';
+    const locale = state.lang === 'ru' ? 'ru-RU' : 'ky-KG';
+    return date.toLocaleString(locale, { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' });
+}
+
 function normalizeProduct(item) {
     return {
         id: Number(item.id || Date.now()),
-        name: String(item.name || '').trim() || 'Товар',
+        name: String(item.name || '').trim() || t('fallback_name'),
         price: Number(item.price || 0),
         imagePath: item.imagePath || item.img || IMAGE_FALLBACK,
         imageVersion: Number(item.imageVersion || Date.now()),
@@ -129,12 +327,6 @@ function utf8ToBase64(text) {
     return btoa(binary);
 }
 
-function base64ToUtf8(base64) {
-    const binary = atob(base64.replace(/\n/g, ''));
-    const bytes = Uint8Array.from(binary, char => char.charCodeAt(0));
-    return new TextDecoder().decode(bytes);
-}
-
 function arrayBufferToBase64(buffer) {
     const bytes = new Uint8Array(buffer);
     let binary = '';
@@ -153,7 +345,7 @@ function getExt(fileName) {
 
 function getAuthHeaders() {
     if (!state.token) {
-        throw new Error('Алгач GitHub token киргизиңиз');
+        throw new Error(t('need_token_error'));
     }
 
     return {
@@ -199,9 +391,7 @@ async function putFile(path, contentBase64, message, sha = null) {
         branch: REPO_BRANCH
     };
 
-    if (sha) {
-        body.sha = sha;
-    }
+    if (sha) body.sha = sha;
 
     return githubRequest(`/contents/${path}`, {
         method: 'PUT',
@@ -218,19 +408,64 @@ async function fetchProductsRaw() {
     return response.json();
 }
 
+function updateKpis() {
+    const total = state.products.length;
+    const totalValue = state.products.reduce((sum, item) => sum + Number(item.price || 0), 0);
+    const lastUpdated = state.products.reduce((latest, item) => {
+        const ts = new Date(item.updatedAt || 0).getTime();
+        return ts > latest ? ts : latest;
+    }, 0);
+
+    refs.kpiProducts.textContent = String(total);
+    refs.kpiValue.textContent = formatMoney(totalValue);
+    refs.kpiUpdated.textContent = formatTime(lastUpdated);
+}
+
+function getVisibleProducts() {
+    const query = state.filterQuery.trim().toLowerCase();
+    const visible = query
+        ? state.products.filter(item => {
+            const hit = `${item.name} ${item.price} ${item.id}`.toLowerCase();
+            return hit.includes(query);
+        })
+        : [...state.products];
+
+    switch (state.sortMode) {
+        case 'old':
+            visible.sort((a, b) => Number(a.id) - Number(b.id));
+            break;
+        case 'price_desc':
+            visible.sort((a, b) => Number(b.price) - Number(a.price));
+            break;
+        case 'price_asc':
+            visible.sort((a, b) => Number(a.price) - Number(b.price));
+            break;
+        case 'name_asc':
+            visible.sort((a, b) => String(a.name).localeCompare(String(b.name), state.lang));
+            break;
+        case 'new':
+        default:
+            visible.sort((a, b) => Number(b.id) - Number(a.id));
+            break;
+    }
+
+    return visible;
+}
+
 async function refreshProducts(showToastAfter = false) {
     try {
-        setSyncStatus('Серверден товарлар жүктөлүүдө...', 'warn');
+        setSyncStatusByKey('sync_loading', 'warn');
 
         const payload = await fetchProductsRaw();
         const products = normalizeProductsPayload(payload);
 
         state.products = products;
         renderAdminList();
-        setSyncStatus(`Синхрон OK: ${new Date().toLocaleTimeString()}`, 'ok');
+        updateKpis();
+        setSyncStatusByKey('sync_ok', 'ok', { time: new Date().toLocaleTimeString() });
 
         if (showToastAfter) {
-            showToast('Товарлар серверден жаңырды');
+            showToast(t('toast_products_refreshed'));
         }
     } catch (error) {
         console.error(error);
@@ -238,11 +473,12 @@ async function refreshProducts(showToastAfter = false) {
         if (!state.products.length) {
             state.products = FALLBACK_PRODUCTS.map(normalizeProduct);
             renderAdminList();
+            updateKpis();
         }
 
-        setSyncStatus('Синхрон катасы: products.json окулбай калды', 'err');
+        setSyncStatusByKey('sync_read_error', 'err');
         if (showToastAfter) {
-            showToast('Серверден окууда ката чыкты');
+            showToast(t('toast_connect_error'));
         }
     }
 }
@@ -280,14 +516,14 @@ function setAuthView(authorized) {
 function handleLogin() {
     const password = refs.password.value.trim();
     if (password !== ADMIN_PASS) {
-        showToast('Пароль туура эмес');
+        showToast(t('wrong_password'));
         return;
     }
 
     sessionStorage.setItem(ADMIN_SESSION_KEY, '1');
     refs.password.value = '';
     setAuthView(true);
-    setSyncStatus('GitHub token киргизиңиз', 'warn');
+    setSyncStatusByKey('sync_need_token', 'warn');
 
     const savedToken = localStorage.getItem(GITHUB_TOKEN_KEY) || '';
     refs.githubToken.value = savedToken;
@@ -299,13 +535,13 @@ function handleLogin() {
 function handleLogout() {
     sessionStorage.removeItem(ADMIN_SESSION_KEY);
     setAuthView(false);
-    setSyncStatus('Синхрон күтүүдө...');
+    setSyncStatusByKey('sync_waiting');
 }
 
 async function handleSaveToken() {
     const token = refs.githubToken.value.trim();
     if (!token) {
-        showToast('GitHub token жазыңыз');
+        showToast(t('token_required'));
         return;
     }
 
@@ -315,13 +551,13 @@ async function handleSaveToken() {
     setBusy(true);
     try {
         await githubRequest(`/contents/${PRODUCTS_PATH}?ref=${REPO_BRANCH}`);
-        setSyncStatus('GitHub API туташты. Эми өзгөртүүлөр серверге сакталат.', 'ok');
-        showToast('GitHub туташты');
+        setSyncStatusByKey('sync_connect_ok', 'ok');
+        showToast(t('toast_connected'));
         await refreshProducts(false);
     } catch (error) {
         console.error(error);
-        setSyncStatus('Token же repo уруксат туура эмес', 'err');
-        showToast('GitHub туташуу катасы');
+        setSyncStatusByKey('sync_token_error', 'err');
+        showToast(t('toast_connect_error'));
     } finally {
         setBusy(false);
     }
@@ -332,7 +568,7 @@ function handleImageUpload(event) {
     if (!file) return;
 
     state.selectedImageFile = file;
-    refs.uploadStatus.textContent = `✅ ${file.name}`;
+    refs.uploadStatus.textContent = t('upload_selected', { file: file.name });
 
     const localUrl = URL.createObjectURL(file);
     refs.imagePreview.style.backgroundImage = `url(${localUrl})`;
@@ -344,12 +580,12 @@ async function handleAddProduct() {
     const price = Number(refs.productPrice.value);
 
     if (!name || !price || price <= 0 || !state.selectedImageFile) {
-        showToast('Аталыш, баа жана сүрөт толтуруңуз');
+        showToast(t('fill_required'));
         return;
     }
 
     if (!state.token) {
-        showToast('Алгач GitHub token туташтырыңыз');
+        showToast(t('token_first'));
         return;
     }
 
@@ -375,28 +611,30 @@ async function handleAddProduct() {
         refs.productName.value = '';
         refs.productPrice.value = '';
         refs.productImage.value = '';
-        refs.uploadStatus.textContent = '📸 Сүрөт тандаңыз';
+        refs.uploadStatus.textContent = t('upload_pick');
         refs.imagePreview.style.backgroundImage = '';
         refs.imagePreview.classList.add('hidden');
         state.selectedImageFile = null;
 
-        showToast('Товар серверге сакталды');
+        showToast(t('toast_saved'));
     } catch (error) {
         console.error(error);
-        setSyncStatus('Товар сактоодо ката чыкты', 'err');
-        showToast('Сактоодо ката чыкты');
+        setSyncStatusByKey('sync_save_error', 'err');
+        showToast(t('toast_save_error'));
     } finally {
         setBusy(false);
     }
 }
 
 function renderAdminList() {
-    if (!state.products.length) {
-        refs.adminList.innerHTML = `<div class="empty-state"><strong>Товар жок</strong><p>Жаңы товар кошуңуз.</p></div>`;
+    const visibleProducts = getVisibleProducts();
+
+    if (!visibleProducts.length) {
+        refs.adminList.innerHTML = `<div class="empty-state"><strong>${t('empty_title')}</strong><p>${t('empty_text')}</p></div>`;
         return;
     }
 
-    refs.adminList.innerHTML = state.products.map(product => {
+    refs.adminList.innerHTML = visibleProducts.map(product => {
         const imageUrl = resolveImageUrl(product);
         return `
             <div class="admin-item-card">
@@ -407,9 +645,9 @@ function renderAdminList() {
                         <input type="number" value="${product.price}" data-field="price" data-id="${product.id}">
                     </div>
                     <div class="admin-item-actions">
-                        <button data-action="save" data-id="${product.id}">Сактоо</button>
-                        <button data-action="change-image" data-id="${product.id}">Сүрөт алмаштыруу</button>
-                        <button data-action="delete" data-id="${product.id}" class="danger">Өчүрүү</button>
+                        <button data-action="save" data-id="${product.id}">${t('save_btn')}</button>
+                        <button data-action="change-image" data-id="${product.id}">${t('change_image_btn')}</button>
+                        <button data-action="delete" data-id="${product.id}" class="danger">${t('delete_btn')}</button>
                         <input class="hidden-input" type="file" accept="image/*" data-file-id="${product.id}">
                     </div>
                 </div>
@@ -433,7 +671,7 @@ async function handleSaveProduct(id) {
     const nextPrice = Number(priceInput?.value || 0);
 
     if (!nextName || !nextPrice || nextPrice <= 0) {
-        showToast('Аталыш же баа туура эмес');
+        showToast(t('invalid_fields'));
         return;
     }
 
@@ -448,18 +686,18 @@ async function handleSaveProduct(id) {
     try {
         await saveProductsToGithub(`update product ${id}`);
         await refreshProducts(false);
-        showToast('Товар жаңыртылды');
+        showToast(t('toast_updated'));
     } catch (error) {
         console.error(error);
-        setSyncStatus('Товар жаңыртууда ката чыкты', 'err');
-        showToast('Жаңыртууда ката');
+        setSyncStatusByKey('sync_update_error', 'err');
+        showToast(t('toast_update_error'));
     } finally {
         setBusy(false);
     }
 }
 
 async function handleDeleteProduct(id) {
-    const confirmed = confirm('Товарды чындап өчүрөсүзбү?');
+    const confirmed = confirm(t('confirm_delete'));
     if (!confirmed) return;
 
     state.products = state.products.filter(item => Number(item.id) !== Number(id));
@@ -468,11 +706,11 @@ async function handleDeleteProduct(id) {
     try {
         await saveProductsToGithub(`delete product ${id}`);
         await refreshProducts(false);
-        showToast('Товар өчүрүлдү');
+        showToast(t('toast_deleted'));
     } catch (error) {
         console.error(error);
-        setSyncStatus('Өчүрүүдө ката чыкты', 'err');
-        showToast('Өчүрүүдө ката');
+        setSyncStatusByKey('sync_delete_error', 'err');
+        showToast(t('toast_delete_error'));
     } finally {
         setBusy(false);
     }
@@ -497,11 +735,11 @@ async function handleReplaceImage(id, file) {
 
         await saveProductsToGithub(`replace image for product ${id}`);
         await refreshProducts(false);
-        showToast('Сүрөт жаңырды жана серверге сакталды');
+        showToast(t('toast_image_updated'));
     } catch (error) {
         console.error(error);
-        setSyncStatus('Сүрөт жаңыртууда ката чыкты', 'err');
-        showToast('Сүрөт жаңыртууда ката');
+        setSyncStatusByKey('sync_image_error', 'err');
+        showToast(t('toast_image_error'));
     } finally {
         setBusy(false);
     }
@@ -536,6 +774,27 @@ function bindAdminListEvents() {
     });
 }
 
+function bindLangEvents() {
+    refs.langButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            if (state.busy) return;
+            setLanguage(button.dataset.lang);
+        });
+    });
+}
+
+function bindFilterEvents() {
+    refs.adminSearch.addEventListener('input', () => {
+        state.filterQuery = refs.adminSearch.value;
+        renderAdminList();
+    });
+
+    refs.adminSort.addEventListener('change', () => {
+        state.sortMode = refs.adminSort.value;
+        renderAdminList();
+    });
+}
+
 function initialize() {
     refs.loginCard = $('#login-card');
     refs.adminPanel = $('#admin-panel');
@@ -554,6 +813,12 @@ function initialize() {
     refs.addProduct = $('#add-product');
     refs.adminList = $('#admin-list');
     refs.toast = $('#toast');
+    refs.langButtons = Array.from(document.querySelectorAll('.lang-btn'));
+    refs.adminSearch = $('#admin-search');
+    refs.adminSort = $('#admin-sort');
+    refs.kpiProducts = $('#kpi-products');
+    refs.kpiValue = $('#kpi-value');
+    refs.kpiUpdated = $('#kpi-updated');
 
     refs.loginBtn.addEventListener('click', handleLogin);
     refs.password.addEventListener('keydown', event => {
@@ -567,6 +832,8 @@ function initialize() {
     refs.addProduct.addEventListener('click', handleAddProduct);
 
     bindAdminListEvents();
+    bindLangEvents();
+    bindFilterEvents();
 
     const isAuthorized = sessionStorage.getItem(ADMIN_SESSION_KEY) === '1';
     setAuthView(isAuthorized);
@@ -575,11 +842,14 @@ function initialize() {
     refs.githubToken.value = savedToken;
     state.token = savedToken;
 
+    refs.adminSort.value = state.sortMode;
+    setLanguage(state.lang);
+
     if (isAuthorized) {
         refreshProducts(false);
-        setSyncStatus(savedToken ? 'GitHub token табылды, синхрон даяр' : 'GitHub token киргизиңиз', savedToken ? 'ok' : 'warn');
+        setSyncStatusByKey(savedToken ? 'sync_token_found' : 'sync_need_token', savedToken ? 'ok' : 'warn');
     } else {
-        setSyncStatus('Админ кирүүнү күтүүдө...');
+        setSyncStatusByKey('sync_login_waiting');
     }
 }
 
