@@ -1,0 +1,45 @@
+{
+  "updatedAt": "2026-05-15T00:00:00.000Z",
+  "slides": [
+    {
+      "id": 1,
+      "titleKy": "Передний осс",
+      "titleRu": "Передняя ось",
+      "textKy": "Жүккө чыдамдуу жана сапаттуу алдыңкы бөлүк.",
+      "textRu": "Прочная передняя деталь для высокой нагрузки.",
+      "imagePath": "assets/products/front-hub.jpeg",
+      "imageVersion": 1745486400001,
+      "updatedAt": "2026-04-24T09:20:00.000Z"
+    },
+    {
+      "id": 2,
+      "titleKy": "Задный стоп",
+      "titleRu": "Задний стоп",
+      "textKy": "LED стоп жарыгы, түнкүсүн так көрүнөт.",
+      "textRu": "Яркий LED стоп-сигнал, хорошо заметен ночью.",
+      "imagePath": "assets/products/rear-stop.jpeg",
+      "imageVersion": 1745486400002,
+      "updatedAt": "2026-04-24T09:20:00.000Z"
+    },
+    {
+      "id": 3,
+      "titleKy": "Реле",
+      "titleRu": "Реле",
+      "textKy": "Электро системага туруктуу реле.",
+      "textRu": "Надежное реле для стабильной электро-системы.",
+      "imagePath": "assets/products/relay.jpeg",
+      "imageVersion": 1745486400003,
+      "updatedAt": "2026-04-24T09:20:00.000Z"
+    },
+    {
+      "id": 4,
+      "titleKy": "Тормоз колодкасы",
+      "titleRu": "Тормозная колодка",
+      "textKy": "Коопсуз токтотуу үчүн жогорку сапат.",
+      "textRu": "Высокое качество для безопасного торможения.",
+      "imagePath": "assets/products/brake-shoe.jpeg",
+      "imageVersion": 1745486400004,
+      "updatedAt": "2026-04-24T09:20:00.000Z"
+    }
+  ]
+}

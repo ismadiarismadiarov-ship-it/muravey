@@ -4,178 +4,176 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ЭлМОТО | Башкы бет</title>
-    <meta name="description" content="ЭлМОТО башкы бет: каталог, заказ, карзина, избранное жана баннер маалыматтары.">
-    <meta name="keywords" content="ЭлМОТО, мото, каталог, трициклы, скутеры, запчасты, заказ">
+    <meta name="description" content="ЭлМОТО онлайн мото маркет: трицикл, скутер, запчасть, сервис жана тез заказ.">
+    <meta name="keywords" content="ЭлМОТО, ElMOTO, мото, moto, мото магазин, трицикл, скутер, запчасть, сервис, заказ">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta name="theme-color" content="#0f1e3a">
+    <meta name="theme-color" content="#131f34">
     <meta property="og:title" content="ЭлМОТО | Башкы бет">
-    <meta property="og:description" content="ЭлМОТО каталог жана заказ системасы.">
+    <meta property="og:description" content="ЭлМОТО каталог, заказ жана запчасть системасы.">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ky_KG">
+    <meta property="og:site_name" content="ЭлМОТО">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/jpeg" href="assets/emoto-logo.jpeg">
     <link rel="apple-touch-icon" href="assets/emoto-logo.jpeg">
     <meta property="og:image" content="assets/emoto-logo.jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Russo+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="home.css">
 </head>
 <body id="top">
-    <header class="home-header">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="home-header" aria-label="Башкы навигация">
+        <div class="market-note">
+            <div class="shell market-note-inner">
+                <p data-i18n="market_note">ЭлМОТО: мото тетик, скутер жана трицикл үчүн онлайн маркет.</p>
+                <div class="note-actions">
+                    <a href="server.html" data-i18n="service_link">Сервис</a>
+                    <div class="lang-switch" role="group" aria-label="Тил">
+                        <button class="lang-btn is-active" type="button" data-lang="ky">KG</button>
+                        <button class="lang-btn" type="button" data-lang="ru">RU</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="shell top-row">
             <div class="brand-wrap">
                 <button id="go-back-btn" class="back-nav-btn" type="button" aria-label="Артка кайтуу">←</button>
                 <a href="shop.html?panel=orders" class="brand-block" aria-label="ЭлМОТО басканда заказдарга өтүү">
                     <img src="assets/emoto-logo.jpeg" alt="ЭлМОТО эмблемасы">
                     <div class="brand-text">
-                        <p class="brand-title">
-                            <span class="brand-el"><span class="brand-lead">Э</span>л</span><span class="brand-moto"><span class="brand-lead">М</span>ОТО</span>
-                        </p>
-                        <p class="brand-sub">мото маркет</p>
+                        <p class="brand-title"><span class="brand-el">Эл</span><span class="brand-moto">МОТО</span></p>
+                        <p class="brand-sub">moto market</p>
                     </div>
                 </a>
             </div>
 
-            <form id="home-search-form" class="home-search" autocomplete="off">
+            <form id="home-search-form" class="home-search" autocomplete="off" role="search">
+                <label for="home-search-scope" class="visually-hidden">Издөө бөлүмү</label>
                 <select id="home-search-scope" aria-label="Издөө бөлүмү">
-                    <option value="all">Бардыгы</option>
-                    <option value="tricycles">Трициклы</option>
-                    <option value="scooters">Скутеры</option>
-                    <option value="parts">Запчасты</option>
-                    <option value="service">Сервис</option>
+                    <option value="all" data-i18n="scope_all">Бардыгы</option>
+                    <option value="tricycles" data-i18n="scope_tricycles">Трициклы</option>
+                    <option value="scooters" data-i18n="scope_scooters">Скутеры</option>
+                    <option value="parts" data-i18n="scope_parts">Запчасты</option>
+                    <option value="service" data-i18n="scope_service">Сервис</option>
                 </select>
-                <input id="home-search-input" type="search" placeholder="ЭлМОТО маркеттен издөө...">
-                <button type="submit">Издөө</button>
+                <label for="home-search-input" class="visually-hidden">Товар издөө</label>
+                <input id="home-search-input" type="search" data-i18n-placeholder="search_placeholder" placeholder="Мисалы: реле, тормоз, скутер...">
+                <button type="submit" data-i18n="search_btn">Издөө</button>
             </form>
 
-            <div class="header-tools">
-                <button class="tool-btn" data-nav-target="orders" type="button">Заказы <span id="orders-count">0</span></button>
-                <button class="tool-btn" data-nav-target="favorites" type="button">Избранное <span id="favorites-count">0</span></button>
-                <button class="tool-btn" data-nav-target="cart" type="button">Карзина <span id="cart-count">0</span></button>
+            <div class="header-tools" aria-label="Кардардын куралдары">
+                <button id="orders-tool" class="tool-btn" data-nav-target="orders" type="button">
+                    <span class="tool-icon">🧾</span>
+                    <span class="tool-count" id="orders-count">0</span>
+                    <span class="tool-label" data-i18n="orders_label">Заказ</span>
+                </button>
+                <button id="favorites-tool" class="tool-btn" data-nav-target="favorites" type="button">
+                    <span class="tool-icon">🤍</span>
+                    <span class="tool-count" id="favorites-count">0</span>
+                    <span class="tool-label" data-i18n="favorites_label">Избранное</span>
+                </button>
+                <button id="cart-tool" class="tool-btn" data-nav-target="cart" type="button">
+                    <span class="tool-icon">🛒</span>
+                    <span class="tool-count" id="cart-count">0</span>
+                    <span class="tool-label" data-i18n="cart_label">Карзина</span>
+                </button>
             </div>
         </div>
     </header>
 
-    <main class="shell home-main">
-        <section class="hero-layout">
-            <aside class="catalog-column" aria-label="Каталог бөлүмдөрү">
-                <h2>Каталог</h2>
-                <a class="catalog-item" href="tricycles.html">
-                    <strong><span class="catalog-icon">🛺</span> Трициклы</strong>
-                    <span>Трицикл товарлары</span>
-                </a>
+    <main id="main-content" class="shell home-main">
+        <section class="hero-layout" aria-label="Башкы каталог жана баннер">
+            <aside class="catalog-column" aria-label="Каталог">
+                <button id="catalog-toggle" class="catalog-toggle" type="button" aria-expanded="false" aria-controls="catalog-panel">
+                    <span class="catalog-toggle-icon">📂</span>
+                    <span data-i18n="catalog_toggle">Каталог</span>
+                </button>
 
-                <a class="catalog-item" href="scooters.html">
-                    <strong><span class="catalog-icon">🛵</span> Скутеры</strong>
-                    <span>Скутер моделдери</span>
-                </a>
+                <div id="catalog-panel" class="catalog-panel" hidden>
+                    <a class="catalog-item" href="tricycles.html">
+                        <span class="catalog-icon">🛺</span>
+                        <div>
+                            <strong data-i18n="cat_tricycles">Трициклы</strong>
+                            <span data-i18n="cat_tricycles_desc">Жүк жана шаардык моделдер</span>
+                        </div>
+                    </a>
 
-                <a class="catalog-item" href="zapchasty.html">
-                    <strong><span class="catalog-icon">🔩</span> Запчасты</strong>
-                    <span>Тетиктер каталогу</span>
-                </a>
+                    <a class="catalog-item" href="scooters.html">
+                        <span class="catalog-icon">🛵</span>
+                        <div>
+                            <strong data-i18n="cat_scooters">Скутеры</strong>
+                            <span data-i18n="cat_scooters_desc">Күнүмдүк жүрүүгө ылайыктуу</span>
+                        </div>
+                    </a>
 
-                <a class="catalog-item" href="server.html">
-                    <strong><span class="catalog-icon">🔧</span> Сервис</strong>
-                    <span>Байланыш жана дарек</span>
-                </a>
+                    <a class="catalog-item" href="zapchasty.html">
+                        <span class="catalog-icon">🔩</span>
+                        <div>
+                            <strong data-i18n="cat_parts">Запчасты</strong>
+                            <span data-i18n="cat_parts_desc">Тетиктер жана расходник</span>
+                        </div>
+                    </a>
+
+                    <a class="catalog-item" href="server.html">
+                        <span class="catalog-icon">🔧</span>
+                        <div>
+                            <strong data-i18n="cat_service">Сервис</strong>
+                            <span data-i18n="cat_service_desc">Дарек жана байланыш</span>
+                        </div>
+                    </a>
+                </div>
             </aside>
 
-            <div class="hero-slider" aria-label="ЭлМОТО баннери">
+            <section class="hero-slider" aria-label="ЭлМОТО реклама баннерлери">
                 <div id="hero-slides" class="hero-slides">
-                    <article class="slide is-active" data-info-title="Передний осс" data-info-text="Бул позиция жүккө чыдамдуу. Сапаттуу металл жана узак мөөнөт.">
+                    <article class="slide is-active" data-title-ky="Передний осс" data-title-ru="Передняя ось" data-text-ky="Жүккө чыдамдуу жана сапаттуу алдыңкы бөлүк." data-text-ru="Прочная передняя деталь для высокой нагрузки.">
                         <img src="assets/products/front-hub.jpeg" alt="Передний осс">
                     </article>
-
-                    <article class="slide" data-info-title="Задный стоп" data-info-text="LED стоп жарыгы түнкүсүн даана көрүнөт. Тез орнотулат.">
+                    <article class="slide" data-title-ky="Задный стоп" data-title-ru="Задний стоп" data-text-ky="LED стоп жарыгы, түнкүсүн так көрүнөт." data-text-ru="Яркий LED стоп-сигнал, хорошо заметен ночью.">
                         <img src="assets/products/rear-stop.jpeg" alt="Задный стоп">
                     </article>
-
-                    <article class="slide" data-info-title="Реле" data-info-text="Электро тутум үчүн туруктуу иштеген ишенимдүү реле.">
+                    <article class="slide" data-title-ky="Реле" data-title-ru="Реле" data-text-ky="Электро системага туруктуу реле." data-text-ru="Надежное реле для стабильной электро-системы.">
                         <img src="assets/products/relay.jpeg" alt="Реле">
                     </article>
-
-                    <article class="slide" data-info-title="Тормоз колодкасы" data-info-text="Жогорку сапаттагы тормоз колодка, тормоздоону жумшак жана коопсуз кылат.">
+                    <article class="slide" data-title-ky="Тормоз колодкасы" data-title-ru="Тормозная колодка" data-text-ky="Коопсуз токтотуу үчүн жогорку сапат." data-text-ru="Высокое качество для безопасного торможения.">
                         <img src="assets/products/brake-shoe.jpeg" alt="Тормоз колодкасы">
                     </article>
                 </div>
 
-                <div class="slider-controls">
-                    <button id="slide-prev" type="button" aria-label="Мурунку баннер">←</button>
-                    <div id="slide-dots" class="dots" aria-label="Слайд тандоо">
-                        <button type="button" class="is-active" data-slide="0"></button>
-                        <button type="button" data-slide="1"></button>
-                        <button type="button" data-slide="2"></button>
-                        <button type="button" data-slide="3"></button>
-                    </div>
-                    <button id="slide-next" type="button" aria-label="Кийинки баннер">→</button>
+                <button id="slide-prev" class="slide-arrow prev" type="button" aria-label="Мурунку баннер">❮</button>
+                <button id="slide-next" class="slide-arrow next" type="button" aria-label="Кийинки баннер">❯</button>
+
+                <div id="slide-dots" class="dots" aria-label="Слайд тандоо">
+                    <button type="button" class="is-active" data-slide="0"></button>
+                    <button type="button" data-slide="1"></button>
+                    <button type="button" data-slide="2"></button>
+                    <button type="button" data-slide="3"></button>
                 </div>
 
-                <div class="hero-info">
-                    <button id="slide-info-btn" type="button">Маалымат</button>
-                    <div id="slide-info-box" class="slide-info-box" hidden>
-                        <strong id="slide-info-title"></strong>
-                        <p id="slide-info-text"></p>
-                    </div>
+                <div class="slide-caption">
+                    <strong id="slide-info-title"></strong>
+                    <p id="slide-info-text"></p>
                 </div>
-            </div>
+            </section>
         </section>
 
-        <section class="feature-row">
-            <button class="feature-tile" type="button" data-nav-target="cart">
-                <strong>Карзина</strong>
-                <span id="cart-count-tile">0 товар</span>
-            </button>
-            <button class="feature-tile" type="button" data-nav-target="favorites">
-                <strong>Избранное</strong>
-                <span id="favorites-count-tile">0 товар</span>
-            </button>
-            <button class="feature-tile" type="button" data-nav-target="orders">
-                <strong>Заказы</strong>
-                <span id="orders-count-tile">0 заказ</span>
-            </button>
-            <a class="feature-tile feature-link" href="shop.html?panel=orders">
-                <strong>ЭлМОТО Дүкөн</strong>
-                <span>Түз заказдар бетине өтүү</span>
-            </a>
-        </section>
-
-        <section class="quick-row" aria-label="Ыкчам бөлүмдөр">
-            <a class="quick-item" href="#top">
-                <span class="quick-icon">📂</span>
-                <span>Каталог</span>
-            </a>
-            <a class="quick-item" href="shop.html?panel=orders">
-                <span class="quick-icon">❤️</span>
-                <span>Заказдар</span>
-            </a>
-            <a class="quick-item" href="server.html">
-                <span class="quick-icon">⚡</span>
-                <span>Тез сервис</span>
-            </a>
-            <a class="quick-item" href="zapchasty.html">
-                <span class="quick-icon">🔩</span>
-                <span>Запчасты</span>
-            </a>
-            <a class="quick-item" href="scooters.html">
-                <span class="quick-icon">🛵</span>
-                <span>Скутеры</span>
-            </a>
-        </section>
-
-        <section class="recommended">
+        <section class="recommended" aria-label="Сунушталган товарлар">
             <div class="section-head">
-                <h2>Сунушталган товарлар</h2>
-                <a href="shop.html">Баарын көрүү</a>
+                <h2 data-i18n="recommended_title">Сунушталган товарлар</h2>
+                <a href="shop.html" data-i18n="recommended_all">Баарын көрүү</a>
             </div>
+
             <div class="rec-grid">
                 <article class="rec-card">
                     <button class="fav-toggle" type="button" data-fav-id="101" data-name="тормозной колотка" data-price="400" data-image="assets/products/brake-shoe.jpeg" aria-label="Избранное">♡</button>
                     <img src="assets/products/brake-shoe.jpeg" alt="тормозной колотка">
                     <h3>тормозной колотка</h3>
                     <p>400 сом</p>
-                    <a href="shop.html?search=тормозной">Заказ берүү</a>
+                    <a href="shop.html?search=тормозной" data-i18n="order_btn">Заказ берүү</a>
                 </article>
 
                 <article class="rec-card">
@@ -183,7 +181,7 @@
                     <img src="assets/products/rear-stop.jpeg" alt="задный стоп">
                     <h3>задный стоп</h3>
                     <p>500 сом</p>
-                    <a href="shop.html?search=стоп">Заказ берүү</a>
+                    <a href="shop.html?search=стоп" data-i18n="order_btn">Заказ берүү</a>
                 </article>
 
                 <article class="rec-card">
@@ -191,7 +189,7 @@
                     <img src="assets/products/relay.jpeg" alt="реле">
                     <h3>реле</h3>
                     <p>180 сом</p>
-                    <a href="shop.html?search=реле">Заказ берүү</a>
+                    <a href="shop.html?search=реле" data-i18n="order_btn">Заказ берүү</a>
                 </article>
 
                 <article class="rec-card">
@@ -199,26 +197,26 @@
                     <img src="assets/products/front-hub.jpeg" alt="передный осс">
                     <h3>передный осс</h3>
                     <p>1200 сом</p>
-                    <a href="shop.html?search=осс">Заказ берүү</a>
+                    <a href="shop.html?search=осс" data-i18n="order_btn">Заказ берүү</a>
                 </article>
             </div>
         </section>
 
-        <section id="favorites-section" class="recommended favorites-board">
+        <section id="favorites-section" class="recommended favorites-board" aria-label="Избранное тизмеси">
             <div class="section-head">
-                <h2>Избранное тизмеси</h2>
-                <a href="shop.html?panel=orders">Заказдарга өтүү</a>
+                <h2 data-i18n="favorites_board_title">Избранное тизмеси</h2>
+                <a href="shop.html?panel=orders" data-i18n="favorites_to_orders">Заказдарга өтүү</a>
             </div>
             <div id="favorites-grid" class="favorites-grid"></div>
         </section>
     </main>
 
-    <nav class="mobile-nav">
-        <a href="#top"><span class="micon">🏠</span><span>Башкы</span></a>
-        <a href="tricycles.html"><span class="micon">🛺</span><span>Каталог</span></a>
-        <button type="button" data-nav-target="favorites"><span class="micon">🤍</span><span>Избранное</span></button>
-        <button type="button" data-nav-target="orders"><span class="micon">🛒</span><span>Карзина</span></button>
-        <a href="shop.html?panel=orders"><span class="micon">🛍️</span><span>Дүкөн</span></a>
+    <nav class="mobile-nav" aria-label="Мобилдик меню">
+        <a href="#top"><span class="micon">🏠</span><span data-i18n="mobile_home">Башкы</span></a>
+        <button type="button" id="mobile-catalog-toggle"><span class="micon">📂</span><span data-i18n="mobile_catalog">Каталог</span></button>
+        <button type="button" data-nav-target="favorites"><span class="micon">🤍</span><span data-i18n="mobile_favorites">Избранное</span></button>
+        <button type="button" data-nav-target="orders"><span class="micon">🛒</span><span data-i18n="mobile_orders">Заказы</span></button>
+        <a href="server.html"><span class="micon">🔧</span><span data-i18n="mobile_service">Сервис</span></a>
     </nav>
 
     <script src="home.js"></script>

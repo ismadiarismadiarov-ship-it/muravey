@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ЭлМОТО Админ</title>
-    <meta name="description" content="ЭлМОТО админ барагы. Товарлар GitHub'да сакталат жана бардык түзмөктө бирдей көрүнөт.">
+    <meta name="description" content="ЭлМОТО админ барагы: баннер реклама жана товар башкаруу.">
     <meta name="robots" content="noindex, nofollow">
     <link rel="icon" type="image/jpeg" href="assets/emoto-logo.jpeg">
     <link rel="apple-touch-icon" href="assets/emoto-logo.jpeg">
@@ -46,8 +46,8 @@
         <section id="admin-panel" class="admin-card admin-hidden">
             <div class="admin-panel-head">
                 <div>
-                    <h2 data-i18n="products_manage">Товар башкаруу</h2>
-                    <p data-i18n="products_manage_text">Товарлар жана сүрөттөр GitHub серверинде сакталат.</p>
+                    <h2 data-i18n="content_manage">Контент башкаруу</h2>
+                    <p data-i18n="content_manage_text">Баннер рекламаны жана товарларды өзүнчө башкарасыз.</p>
                 </div>
                 <button id="admin-logout" class="secondary-btn" data-i18n="logout_btn">Чыгуу</button>
             </div>
@@ -56,6 +56,10 @@
                 <div class="admin-kpi">
                     <strong id="kpi-products">0</strong>
                     <span data-i18n="kpi_products">Товар</span>
+                </div>
+                <div class="admin-kpi">
+                    <strong id="kpi-ads">0</strong>
+                    <span data-i18n="kpi_ads">Баннер</span>
                 </div>
                 <div class="admin-kpi">
                     <strong id="kpi-value">0 сом</strong>
@@ -78,29 +82,66 @@
                 <p id="sync-status" class="sync-status">Синхрон күтүүдө...</p>
             </div>
 
-            <div class="admin-tools">
-                <input id="admin-search" type="search" placeholder="Товар издөө..." data-i18n-placeholder="search_placeholder">
-                <select id="admin-sort" aria-label="Сорттоо">
-                    <option value="new" data-i18n="sort_new">Жаңы биринчи</option>
-                    <option value="old" data-i18n="sort_old">Эски биринчи</option>
-                    <option value="price_desc" data-i18n="sort_price_desc">Баасы кымбат биринчи</option>
-                    <option value="price_asc" data-i18n="sort_price_asc">Баасы арзан биринчи</option>
-                    <option value="name_asc" data-i18n="sort_name">Аты боюнча</option>
-                </select>
+            <div class="admin-tabs" role="tablist" aria-label="Админ бөлүмдөр">
+                <button class="admin-tab-btn is-active" type="button" data-admin-tab="ads" data-i18n="tab_ads">Баннер реклама</button>
+                <button class="admin-tab-btn" type="button" data-admin-tab="products" data-i18n="tab_products">Товарлар</button>
             </div>
 
-            <div class="admin-form-grid">
-                <input id="product-name" type="text" placeholder="Товардын аталышы" data-i18n-placeholder="product_name_placeholder">
-                <input id="product-price" type="number" placeholder="Баасы (сом)" data-i18n-placeholder="product_price_placeholder">
-                <label class="upload-label" for="product-image">
-                    <span id="upload-status">📸 Сүрөт тандаңыз</span>
-                </label>
-                <input id="product-image" type="file" accept="image/*" hidden>
-                <div id="image-preview" class="image-preview hidden"></div>
-                <button id="add-product" class="checkout-btn" data-i18n="add_product_btn">Товар кошуу</button>
-            </div>
+            <section id="ads-section" class="admin-section is-active">
+                <div class="section-intro">
+                    <h3 data-i18n="ads_manage">Баннер реклама башкаруу</h3>
+                    <p data-i18n="ads_manage_text">Башкы беттеги чоң баннерге чыга турган рекламаларды ушул жерден кошосуз.</p>
+                </div>
 
-            <div id="admin-list" class="admin-list-grid"></div>
+                <div class="admin-form-grid ad-form-grid">
+                    <input id="ad-title-ky" type="text" data-i18n-placeholder="ad_title_ky_placeholder" placeholder="Баннер аталышы (кыргызча)">
+                    <input id="ad-title-ru" type="text" data-i18n-placeholder="ad_title_ru_placeholder" placeholder="Название баннера (русский)">
+
+                    <textarea id="ad-text-ky" rows="3" data-i18n-placeholder="ad_text_ky_placeholder" placeholder="Баннер кыска тексти (кыргызча)"></textarea>
+                    <textarea id="ad-text-ru" rows="3" data-i18n-placeholder="ad_text_ru_placeholder" placeholder="Короткий текст баннера (русский)"></textarea>
+
+                    <label class="upload-label" for="ad-image">
+                        <span id="ad-upload-status">📸 Баннер сүрөт тандаңыз</span>
+                    </label>
+                    <input id="ad-image" type="file" accept="image/*" hidden>
+                    <div id="ad-image-preview" class="image-preview hidden"></div>
+
+                    <button id="add-ad" class="checkout-btn" data-i18n="add_ad_btn">Баннер кошуу</button>
+                </div>
+
+                <div id="ads-list" class="admin-list-grid"></div>
+            </section>
+
+            <section id="products-section" class="admin-section">
+                <div class="section-intro">
+                    <h3 data-i18n="products_manage">Товар башкаруу</h3>
+                    <p data-i18n="products_manage_text">Товарлар жана сүрөттөр GitHub серверинде сакталат.</p>
+                </div>
+
+                <div class="admin-tools">
+                    <input id="admin-search" type="search" placeholder="Товар издөө..." data-i18n-placeholder="search_placeholder">
+                    <select id="admin-sort" aria-label="Сорттоо">
+                        <option value="new" data-i18n="sort_new">Жаңы биринчи</option>
+                        <option value="old" data-i18n="sort_old">Эски биринчи</option>
+                        <option value="price_desc" data-i18n="sort_price_desc">Баасы кымбат биринчи</option>
+                        <option value="price_asc" data-i18n="sort_price_asc">Баасы арзан биринчи</option>
+                        <option value="name_asc" data-i18n="sort_name">Аты боюнча</option>
+                    </select>
+                </div>
+
+                <div class="admin-form-grid">
+                    <input id="product-name" type="text" placeholder="Товардын аталышы" data-i18n-placeholder="product_name_placeholder">
+                    <input id="product-price" type="number" placeholder="Баасы (сом)" data-i18n-placeholder="product_price_placeholder">
+                    <label class="upload-label" for="product-image">
+                        <span id="upload-status">📸 Сүрөт тандаңыз</span>
+                    </label>
+                    <input id="product-image" type="file" accept="image/*" hidden>
+                    <div id="image-preview" class="image-preview hidden"></div>
+                    <button id="add-product" class="checkout-btn" data-i18n="add_product_btn">Товар кошуу</button>
+                </div>
+
+                <div id="admin-list" class="admin-list-grid"></div>
+            </section>
         </section>
     </main>
 
@@ -109,9 +150,9 @@
     <nav class="mobile-tabs" aria-label="Төмөнкү навигация">
         <a href="index.html"><span>🏠</span><em>Башкы</em></a>
         <a href="shop.html?panel=orders"><span>🛒</span><em>Заказ</em></a>
-        <a href="zapchasty.html"><span>🔩</span><em>Товар</em></a>
+        <a href="admin.html?tab=ads"><span>🖼️</span><em>Баннер</em></a>
+        <a href="admin.html?tab=products"><span>📦</span><em>Товар</em></a>
         <a href="qr.html"><span>🔳</span><em>QR</em></a>
-        <a href="admin.html"><span>🛠️</span><em>Админ</em></a>
     </nav>
 
     <script src="admin.js"></script>
