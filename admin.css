@@ -58,6 +58,13 @@
     color: rgba(255, 255, 255, 0.84);
 }
 
+.admin-page-body .brand {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
 .admin-page-body .qr-top-link {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 255, 255, 0.2);

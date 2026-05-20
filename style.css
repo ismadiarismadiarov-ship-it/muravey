@@ -73,7 +73,10 @@ html {
 
 body {
     min-height: 100vh;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background:
+        radial-gradient(circle at 8% -12%, rgba(0, 157, 255, 0.18) 0%, rgba(0, 157, 255, 0) 34%),
+        radial-gradient(circle at 106% 8%, rgba(255, 170, 43, 0.22) 0%, rgba(255, 170, 43, 0) 36%),
+        linear-gradient(145deg, #eef2fb 0%, #dfe9f7 100%);
     color: var(--text);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     line-height: 1.6;
@@ -114,18 +117,44 @@ button {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    box-shadow: var(--shadow-sm);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid #d8e5f8;
+    box-shadow: 0 12px 28px rgba(22, 45, 84, 0.1);
 }
 
 .header-grid {
     display: grid;
-    grid-template-columns: minmax(220px, 300px) minmax(260px, 1fr) auto;
+    grid-template-columns: minmax(250px, 360px) minmax(260px, 1fr) auto;
     align-items: center;
     gap: 14px;
     padding: 14px 0;
+}
+
+.brand-stack {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.back-nav-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    border: 1px solid #d4e2f8;
+    background: linear-gradient(145deg, #ffffff 0%, #edf4ff 100%);
+    color: #224b84;
+    font-size: 1.16rem;
+    font-weight: 900;
+    box-shadow: 0 8px 16px rgba(27, 77, 148, 0.16);
+    transition: var(--transition);
+}
+
+.back-nav-btn:hover {
+    transform: translateY(-1px);
+    border-color: #8fb3e4;
+    box-shadow: 0 10px 20px rgba(33, 83, 153, 0.24);
 }
 
 .brand {
@@ -133,6 +162,11 @@ button {
     align-items: center;
     gap: 12px;
     min-width: 0;
+    padding: 6px 10px 6px 6px;
+    border: 1px solid #d5e2f6;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 10px 22px rgba(22, 52, 98, 0.1);
 }
 
 .brand-emblem {
@@ -360,7 +394,7 @@ button {
 
 .hero-stats strong {
     display: block;
-    font-size: 1.9rem;
+    font-size: 1.55rem;
     font-weight: 800;
     line-height: 1;
     margin-bottom: 6px;
@@ -525,11 +559,13 @@ button {
     inset: 0 auto auto auto;
     right: -100%;
     top: 0;
-    width: min(420px, 100%);
+    width: min(460px, 100%);
     height: 100%;
-    background: var(--surface);
+    background:
+        radial-gradient(circle at 12% 2%, rgba(255, 198, 71, 0.2) 0%, rgba(255, 198, 71, 0) 38%),
+        linear-gradient(168deg, #fcfdff 0%, #eef4ff 100%);
     transition: right 0.3s ease;
-    box-shadow: -24px 0 60px rgba(0, 0, 0, 0.15);
+    box-shadow: -30px 0 64px rgba(12, 28, 56, 0.24);
     z-index: 120;
 }
 
@@ -541,7 +577,7 @@ button {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 28px;
+    padding: 22px;
 }
 
 .cart-header,
@@ -550,7 +586,7 @@ button {
     justify-content: space-between;
     align-items: flex-start;
     gap: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 }
 
 .cart-header h2,
@@ -565,26 +601,27 @@ button {
 
 .cart-content {
     flex: 1;
-    margin: 22px 0;
+    margin: 16px 0;
     display: grid;
-    gap: 14px;
+    gap: 10px;
     overflow-y: auto;
 }
 
 .cart-item,
 .admin-item {
-    background: var(--surface-muted);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid #ead28b;
+    border-radius: 14px;
+    padding: 14px;
     display: grid;
-    gap: 10px;
+    gap: 8px;
     transition: var(--transition);
+    box-shadow: 0 8px 18px rgba(33, 54, 88, 0.08);
 }
 
 .cart-item:hover {
-    border-color: var(--primary);
-    background: #fefdf7;
+    border-color: #d3a62d;
+    background: #fffdf4;
 }
 
 .cart-item span,
@@ -600,26 +637,45 @@ button {
 .quantity-control {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 6px 10px;
-    background: var(--surface);
+    gap: 6px;
+    border: 1px solid #dae6fa;
+    border-radius: 12px;
+    padding: 6px;
+    background: #f7faff;
     transition: var(--transition);
+    max-width: max-content;
 }
 
 .quantity-control:hover {
-    border-color: var(--primary);
+    border-color: #96b7e7;
 }
 
-.quantity-control button {
-    border: none;
-    background: transparent;
-    font-size: 1rem;
+.quantity-control .qty-btn {
+    border: 1px solid #d3e0f4;
+    background: #ffffff;
+    color: #294a79;
+    font-size: 0.95rem;
+    font-weight: 800;
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+}
+
+.quantity-control .qty-value {
+    min-width: 18px;
+    text-align: center;
+    font-size: 0.9rem;
     font-weight: 700;
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
+    color: #2f476b;
+}
+
+.quantity-control .qty-remove {
+    border: 0;
+    background: transparent;
+    color: #d73e4b;
+    font-size: 0.84rem;
+    font-weight: 700;
+    padding: 0 4px 0 6px;
 }
 
 .cart-footer {
@@ -634,10 +690,11 @@ button {
     justify-content: space-between;
     font-size: 1.15rem;
     font-weight: 800;
-    background: linear-gradient(135deg, var(--text) 0%, var(--primary-dark) 100%);
-    color: var(--surface);
+    background: linear-gradient(120deg, #1c1712 0%, #d78905 54%, #f7ad18 100%);
+    color: #ffffff;
     padding: 14px 16px;
-    border-radius: 10px;
+    border-radius: 12px;
+    box-shadow: 0 14px 26px rgba(204, 131, 14, 0.3);
 }
 
 .form-group {
@@ -647,12 +704,13 @@ button {
 
 .form-group input {
     width: 100%;
-    border: 1px solid var(--border);
-    border-radius: 10px;
+    border: 1px solid #d7e4f7;
+    border-radius: 12px;
     padding: 12px 16px;
     outline: none;
     font-size: 0.95rem;
     transition: var(--transition);
+    background: #ffffff;
 }
 
 .form-group input:focus {
@@ -662,8 +720,8 @@ button {
 
 .checkout-btn {
     border: none;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+    border-radius: 12px;
+    background: linear-gradient(135deg, #0d1a31 0%, #1f4e96 100%);
     color: #fff;
     font-weight: 800;
     padding: 14px;
@@ -683,12 +741,20 @@ button {
 }
 
 .icon-button {
-    border: none;
-    background: transparent;
+    border: 1px solid #d5e3f8;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #ffffff;
     font-size: 1.2rem;
-    color: var(--text);
+    color: #214778;
     cursor: pointer;
     transition: var(--transition);
+}
+
+.icon-button:hover {
+    border-color: #95b7e8;
+    background: #eff5ff;
 }
 
 .admin-entry {
@@ -1021,7 +1087,7 @@ body.dark-mode .quantity-control button {
         gap: 8px;
     }
 
-    .brand {
+    .brand-stack {
         justify-content: flex-start;
     }
 
@@ -1060,8 +1126,19 @@ body.dark-mode .quantity-control button {
         padding-bottom: 12px;
     }
 
+    .brand-stack {
+        gap: 8px;
+    }
+
     .brand {
-        gap: 10px;
+        gap: 8px;
+        padding: 5px 8px 5px 5px;
+    }
+
+    .back-nav-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
     }
 
     .brand-emblem {
@@ -1145,7 +1222,7 @@ body.dark-mode .quantity-control button {
     }
 
     .hero-stats strong {
-        font-size: 1.5rem;
+        font-size: 1.24rem;
     }
 
     .market-grid {
@@ -1163,7 +1240,7 @@ body.dark-mode .quantity-control button {
     }
 
     .cart-inner {
-        padding: 18px;
+        padding: 14px;
     }
 
     .qr-card {

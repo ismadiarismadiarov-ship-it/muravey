@@ -34,13 +34,16 @@
 
     <header class="main-header">
         <div class="container header-grid">
-            <a href="index.html" class="brand" aria-label="ЭлМОТО басканда башкы бетке өтүү">
-                <img src="assets/emoto-logo.jpeg" alt="ЭлМОТО эмблемасы" class="brand-emblem">
-                <div class="brand-text">
-                    <span class="logo">ЭлМОТО</span>
-                    <span class="logo-accent">moto тетиктер</span>
+            <div class="brand-stack">
+                <button id="shop-back-btn" class="back-nav-btn" type="button" aria-label="Артка кайтуу">←</button>
+                <div class="brand" aria-label="ЭлМОТО бренди">
+                    <img src="assets/emoto-logo.jpeg" alt="ЭлМОТО эмблемасы" class="brand-emblem">
+                    <div class="brand-text">
+                        <span class="logo">ЭлМОТО</span>
+                        <span class="logo-accent">moto тетиктер</span>
+                    </div>
                 </div>
-            </a>
+            </div>
 
             <form id="search-form" class="search-panel" autocomplete="off">
                 <input id="search-input" type="search" placeholder="Мото тетик издөө..." aria-label="Мото товарларды издөө">
@@ -90,7 +93,7 @@
                     <h2>Заказдар</h2>
                     <p id="cart-summary">0 товар, 0 сом</p>
                 </div>
-                <button id="cart-close" class="icon-button" aria-label="Close cart">✕</button>
+                <button id="cart-close" class="icon-button" aria-label="Заказ панелин жабуу">←</button>
             </div>
 
             <div id="cart-items" class="cart-content"></div>

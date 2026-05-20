@@ -211,6 +211,7 @@ function initialize() {
     refs.customerPhone = $('#customer-phone');
     refs.toast = $('#toast');
     refs.themeToggle = $('#theme-toggle');
+    refs.shopBackButton = $('#shop-back-btn');
     refs.mobileCartOpen = $('#mobile-cart-open');
     refs.mobileFavoritesJump = $('#mobile-favorites-jump');
 
@@ -235,6 +236,17 @@ function initialize() {
 }
 
 function bindEvents() {
+    if (refs.shopBackButton) {
+        refs.shopBackButton.addEventListener('click', () => {
+            if (window.history.length > 1) {
+                window.history.back();
+                return;
+            }
+
+            window.location.href = 'index.html';
+        });
+    }
+
     refs.searchForm.addEventListener('submit', event => {
         event.preventDefault();
         handleSearch();
@@ -336,10 +348,10 @@ function createCartRow(item) {
                 <span>${formatCurrency(item.price)} each</span>
             </div>
             <div class="quantity-control">
-                <button data-action="decrease" data-id="${item.id}">-</button>
-                <span>${item.quantity}</span>
-                <button data-action="increase" data-id="${item.id}">+</button>
-                <button data-action="remove" data-id="${item.id}" style="color:#ff4d4f;">Өчүрүү</button>
+                <button class="qty-btn" data-action="decrease" data-id="${item.id}" aria-label="Санды азайтуу">−</button>
+                <span class="qty-value">${item.quantity}</span>
+                <button class="qty-btn" data-action="increase" data-id="${item.id}" aria-label="Санды көбөйтүү">+</button>
+                <button class="qty-remove" data-action="remove" data-id="${item.id}">Өчүрүү</button>
             </div>
         </div>
     `;

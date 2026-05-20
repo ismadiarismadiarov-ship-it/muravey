@@ -19,13 +19,13 @@ const IMAGE_FALLBACK = 'assets/products/placeholder.svg';
 const I18N = {
     ky: {
         admin_panel_label: 'админ панели', back_to_site: 'Сайтка кайтуу', login_title: 'Админ кирүү', login_text: 'Админ пароль киргизиңиз.',
-        password_placeholder: 'Пароль', login_btn: 'КИРҮҮ', content_manage: 'Контент башкаруу', content_manage_text: 'Баннер рекламаны жана товарларды өзүнчө башкарасыз.',
+        password_placeholder: 'Пароль', login_btn: 'КИРҮҮ', content_manage: 'Контент башкаруу', content_manage_text: 'Бир беттен Реклама же Заказдар бөлүмүнө өтүп башкарасыз.',
         logout_btn: 'Чыгуу', kpi_products: 'Товар', kpi_ads: 'Баннер', kpi_value: 'Жалпы сумма', kpi_updated: 'Акыркы синхрон',
         server_connect_title: 'Сервер туташуу (GitHub API)', server_connect_text: 'Repo укугу бар Personal Access Token киргизиңиз. Бул токен админ браузеринде гана сакталат.',
-        token_placeholder: 'GitHub token (ghp_...)', connect_btn: 'Туташуу', refresh_btn: 'Азыр жаңыртуу', tab_ads: 'Баннер реклама', tab_products: 'Товарлар',
+        token_placeholder: 'GitHub token (ghp_...)', connect_btn: 'Туташуу', refresh_btn: 'Азыр жаңыртуу', tab_ads: 'Реклама', tab_products: 'Заказдар',
         ads_manage: 'Баннер реклама башкаруу', ads_manage_text: 'Башкы беттеги чоң баннерге чыга турган рекламаларды ушул жерден кошосуз.',
         ad_title_ky_placeholder: 'Баннер аталышы (кыргызча)', ad_title_ru_placeholder: 'Название баннера (русский)', ad_text_ky_placeholder: 'Баннер кыска тексти (кыргызча)', ad_text_ru_placeholder: 'Короткий текст баннера (русский)',
-        add_ad_btn: 'Баннер кошуу', products_manage: 'Товар башкаруу', products_manage_text: 'Товарлар жана сүрөттөр GitHub серверинде сакталат.', search_placeholder: 'Товар издөө...',
+        add_ad_btn: 'Баннер кошуу', products_manage: 'Заказ товарларын башкаруу', products_manage_text: 'Заказдарга чыга турган товарлар жана сүрөттөр GitHub серверинде сакталат.', search_placeholder: 'Товар издөө...',
         sort_new: 'Жаңы биринчи', sort_old: 'Эски биринчи', sort_price_desc: 'Баасы кымбат биринчи', sort_price_asc: 'Баасы арзан биринчи', sort_name: 'Аты боюнча',
         product_name_placeholder: 'Товардын аталышы', product_price_placeholder: 'Баасы (сом)', add_product_btn: 'Товар кошуу',
         save_btn: 'Сактоо', change_image_btn: 'Сүрөт алмаштыруу', delete_btn: 'Өчүрүү', upload_pick: '📸 Сүрөт тандаңыз', ad_upload_pick: '📸 Баннер сүрөт тандаңыз',
@@ -33,13 +33,13 @@ const I18N = {
     },
     ru: {
         admin_panel_label: 'панель администратора', back_to_site: 'Вернуться на сайт', login_title: 'Вход администратора', login_text: 'Введите пароль администратора.',
-        password_placeholder: 'Пароль', login_btn: 'ВОЙТИ', content_manage: 'Управление контентом', content_manage_text: 'Баннерная реклама и товары управляются отдельно.',
+        password_placeholder: 'Пароль', login_btn: 'ВОЙТИ', content_manage: 'Управление контентом', content_manage_text: 'С одной страницы можно перейти в разделы Реклама и Заказы.',
         logout_btn: 'Выйти', kpi_products: 'Товары', kpi_ads: 'Баннеры', kpi_value: 'Общая сумма', kpi_updated: 'Последняя синхронизация',
         server_connect_title: 'Подключение к серверу (GitHub API)', server_connect_text: 'Введите Personal Access Token с правами на репозиторий. Токен хранится только в браузере администратора.',
-        token_placeholder: 'GitHub token (ghp_...)', connect_btn: 'Подключить', refresh_btn: 'Обновить сейчас', tab_ads: 'Баннер реклама', tab_products: 'Товары',
+        token_placeholder: 'GitHub token (ghp_...)', connect_btn: 'Подключить', refresh_btn: 'Обновить сейчас', tab_ads: 'Реклама', tab_products: 'Заказы',
         ads_manage: 'Управление баннерами', ads_manage_text: 'Здесь добавляются рекламные баннеры для главной страницы.',
         ad_title_ky_placeholder: 'Название баннера (кыргызча)', ad_title_ru_placeholder: 'Название баннера (русский)', ad_text_ky_placeholder: 'Короткий текст баннера (кыргызча)', ad_text_ru_placeholder: 'Короткий текст баннера (русский)',
-        add_ad_btn: 'Добавить баннер', products_manage: 'Управление товарами', products_manage_text: 'Товары и изображения хранятся на сервере GitHub.', search_placeholder: 'Поиск товара...',
+        add_ad_btn: 'Добавить баннер', products_manage: 'Товары для заказов', products_manage_text: 'Товары и изображения для заказов хранятся на сервере GitHub.', search_placeholder: 'Поиск товара...',
         sort_new: 'Сначала новые', sort_old: 'Сначала старые', sort_price_desc: 'Сначала дороже', sort_price_asc: 'Сначала дешевле', sort_name: 'По названию',
         product_name_placeholder: 'Название товара', product_price_placeholder: 'Цена (сом)', add_product_btn: 'Добавить товар',
         save_btn: 'Сохранить', change_image_btn: 'Заменить фото', delete_btn: 'Удалить', upload_pick: '📸 Выберите изображение', ad_upload_pick: '📸 Выберите изображение баннера',
@@ -201,7 +201,7 @@ function setLanguage(lang) {
 }
 
 function setActiveTab(tab, updateUrl = true) {
-    state.activeTab = tab === 'products' ? 'products' : 'ads';
+    state.activeTab = (tab === 'products' || tab === 'orders') ? 'products' : 'ads';
     localStorage.setItem(ADMIN_TAB_KEY, state.activeTab);
 
     refs.tabButtons.forEach(btn => {
@@ -809,8 +809,8 @@ function initialize() {
     bindAdListEvents();
 
     const tabFromUrl = new URLSearchParams(window.location.search).get('tab');
-    if (tabFromUrl === 'ads' || tabFromUrl === 'products') {
-        state.activeTab = tabFromUrl;
+    if (tabFromUrl === 'ads' || tabFromUrl === 'products' || tabFromUrl === 'orders') {
+        state.activeTab = tabFromUrl === 'orders' ? 'products' : tabFromUrl;
     }
 
     const isAuthorized = sessionStorage.getItem(ADMIN_SESSION_KEY) === '1';
